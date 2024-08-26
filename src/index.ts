@@ -24,4 +24,4 @@ if (!result.success) {
 
 await mkdir('./dist').catch((err) => { if (err.code !== 'EEXIST') throw err })
 
-await writeFile('./dist/links.json', JSON.stringify(result), { encoding: 'utf-8', flag: 'w' })
+await writeFile('./dist/links.json', JSON.stringify(links), { encoding: 'utf-8', flag: 'w' })
