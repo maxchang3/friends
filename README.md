@@ -18,10 +18,10 @@
   + 包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀，如：
     +  部分静态托管服务及 Serverless 服务提供的子域名，如 `github.io`、`vercel.app`、`netlify.app`、`pages.dev` 等。
     +  社区开放注册的子域名，如：`js.org` 等。
-    + 其他在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 等。
-  + 不包含在 Public Suffix List 中的后缀，如：
+  + 其他在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 等。
+  + 以下域名不属于「独立域名」范畴：
     + 由 Freenom 公司运营的免费域名后缀。如.tk、.ml、.ga、.cf、.gq 等。
-    + ~~`gitee.io`~~、`coding.io`、`coding-pages.com` 等。
+    + 不包含在 Public Suffix List 中的后缀，如：~~`gitee.io`~~、`coding.io`、`coding-pages.com` 等。
 + **网站不包含**违法、色情、赌博、暴力、政治等内容。
 
 对于新认识的朋友们，希望借这个机会我们可以「先链后友」。
