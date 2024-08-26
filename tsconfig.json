@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "moduleDetection": "force",
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "exclude": [
+    "dist"
+  ]
+}
