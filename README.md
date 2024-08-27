@@ -18,10 +18,10 @@
   + 包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀，如：
     +  部分静态托管服务及 Serverless 服务提供的子域名，如 `github.io`、`vercel.app`、`netlify.app`、`pages.dev` 等。
     +  社区开放注册的子域名，如：`js.org` 等。
-  + 其他在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 等。
-  + 以下域名不属于「独立域名」范畴：
-    + 由 Freenom 公司运营的免费域名后缀。如.tk、.ml、.ga、.cf、.gq 等。
-    + 不包含在 Public Suffix List 中的后缀，如：~~`gitee.io`~~、`coding.io`、`coding-pages.com` 等。
+  + 其他在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
++ 以下域名不属于「独立域名」范畴：
+  + 由 Freenom 公司运营的免费域名后缀。如.tk、.ml、.ga、.cf、.gq 等。
+  + 不包含在 Public Suffix List 中的后缀，如：~~`gitee.io`~~、`coding.io`、`coding-pages.com` 等。
 + **网站不包含**违法、色情、赌博、暴力、政治等内容。
 
 对于新认识的朋友们，希望借这个机会我们可以「先链后友」。
@@ -57,3 +57,8 @@
 
 + 提交 Pull Request。等待自动格式检查通过后合并。
 + 当 PR 合并后，您的站点信息在 12 小时内会出现在 [Friends](https://zhangmaimai.com/friends) 页面。
+
+---
+<sub>
+* 很大程度上受到了 <a href="https://github.com/SukkaW/Friends">SukkaW/Friends</a> 的启发，部分内容和代码借鉴了该仓库的内容。
+</sub>
