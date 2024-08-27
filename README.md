@@ -2,7 +2,7 @@
 > 此仓库用于新版「张麦麦的博客」。目前尚未正式上线。因此目前仓库的内容可能和现有站点不完全同步。（虽然应该也没有人看）
 
 <p align="center">
-    <img src="./assets/logo.svg" width="60%"/>
+    <img src="./assets/logo.svg" width="50%"/>
 </p>
 
 # Max Chang & Friends 张麦麦和朋友们
