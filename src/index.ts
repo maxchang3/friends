@@ -1,14 +1,12 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
-import { URL } from 'node:url'
 import { buffer } from 'node:stream/consumers'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
 import sharp from 'sharp'
 
 const urlPrefix = 'https://maxchang3.github.io/friends/'
-
 const schema = z.array(
     z.object({
         name: z.string(),
