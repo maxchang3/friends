@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "sharp": "^0.33.5",
     "zod": "^3.23.8",
     "zod-validation-error": "^3.3.1"
   },

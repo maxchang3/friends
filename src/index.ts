@@ -2,8 +2,10 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 import { URL } from 'node:url'
+import { buffer } from 'node:stream/consumers'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
+import sharp from 'sharp'
 
 const urlPrefix = 'https://maxchang3.github.io/friends/'
 
@@ -37,8 +39,10 @@ await Promise.all(
         const filename = new URL(friend.link).hostname.replace(/\./g, '_')
         const filepath = `./img/${filename}.png`
         const { body } = await fetch(friend.avatar)
+        const image = (await buffer(body)).buffer
+        const processedImage = await sharp(image).resize(200, 200).png().toBuffer()
+        writeFile(path.join('./dist', filepath), processedImage)
         friend.avatar = new URL(filepath, urlPrefix).toString()
-        return writeFile(path.join('./dist', filepath), body)
     }),
 )
 
