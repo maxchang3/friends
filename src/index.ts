@@ -5,7 +5,7 @@ import { URL } from 'node:url'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
 
-const urlPrefix = 'https://maxchang3.github.io/'
+const urlPrefix = 'https://maxchang3.github.io/friends/'
 
 const schema = z.array(
     z.object({
