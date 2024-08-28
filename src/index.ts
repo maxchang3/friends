@@ -38,7 +38,7 @@ await Promise.all(
         const filepath = `./img/${filename}.png`
         const { body } = await fetch(friend.avatar)
         const image = (await buffer(body)).buffer
-        const processedImage = await sharp(image).resize(200, 200).png().toBuffer()
+        const processedImage = await sharp(image).resize(100, 100).png().toBuffer()
         writeFile(path.join('./dist', filepath), processedImage)
         friend.avatar = new URL(filepath, urlPrefix).toString()
     }),
