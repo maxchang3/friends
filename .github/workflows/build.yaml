@@ -56,5 +56,6 @@ jobs:
                 branch: gh-pages
                 folder: dist
                 token: ${{ secrets.GH_TOKEN }}
+                clean: true
                 clean-exclude: |
                     robots.txt
