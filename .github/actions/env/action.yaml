@@ -1,4 +1,4 @@
-name: CI
+name: ENV
 description: Prepare the environment
 
 runs:
