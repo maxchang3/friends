@@ -1,32 +1,14 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import process from 'node:process'
 import { buffer } from 'node:stream/consumers'
-import { z } from 'zod'
-import { fromError } from 'zod-validation-error'
 import sharp from 'sharp'
+import { validate } from './utils'
 
 const urlPrefix = 'https://maxchang3.github.io/friends/'
-const schema = z.array(
-    z.object({
-        name: z.string(),
-        link: z.string().url(),
-        avatar: z.string().url(),
-        descr: z.string(),
-    }),
-)
 
 const rawContent = await readFile('./data/links.json', 'utf-8')
 
-const friends = JSON.parse(rawContent)
-
-const parsedFriends = schema.safeParse(friends)
-
-if (!parsedFriends.success) {
-    const validationError = fromError(parsedFriends.error)
-    console.error(validationError.message)
-    process.exit(1)
-}
+const parsedFriends = validate(rawContent)
 
 await rm('./dist', { recursive: true, force: true })
 
