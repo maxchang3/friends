@@ -10,5 +10,11 @@
     "link": "https://youngjuning.js.org",
     "avatar": "https://cdn.jsdelivr.net/gh/youngjuning/images@main/1687969566388.png",
     "descr": "怕什么真理无穷，进一寸有一寸的欢喜。"
+  },
+  {
+    "name": "测试",
+    "link": "https://www.baidu.com",
+    "avatar": "https://www.baidu.com/favicon.ico",
+    "descr": "测试"
   }
 ]
