@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Prepare the environment
-        uses: ./.github/actions/ci.yaml
+        uses: ./.github/actions/ci
 
       - run: pnpm start
 
