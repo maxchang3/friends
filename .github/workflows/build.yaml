@@ -1,61 +1,36 @@
 name: "Max Chang And Friends"
 
 on:
-    push:
-        branches:
-            - main
-        paths:
-            - 'src/**'
-            - 'data/**'
-            - 'package.json'
-            - 'pnpm-lock.yaml'
-            - 'tsconfig.json'
-            - 'eslint.config.js'
-            - '.github/workflows/build.yaml' 
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'data/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.json'
+      - 'eslint.config.js'
+      - '.github/workflows/build.yaml' 
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v4
-            
-            - name: Setup Node.js environment
-              uses: actions/setup-node@v4
-              with:
-                   node-version: 18
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Prepare the environment
+        uses: ./.github/actions/ci
 
-            - uses: pnpm/action-setup@v4
-              name: Install pnpm
-              id: pnpm-install
-              with:
-                version: 9
-                run_install: false
+      - run: pnpm start
 
-            - name: Get pnpm store directory
-              id: pnpm-cache
-              shell: bash
-              run: |
-                echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-            - uses: actions/cache@v4
-              name: Setup pnpm cache
-              with:
-                path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-                key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-                restore-keys: |
-                        ${{ runner.os }}-pnpm-store-
-
-            - run: pnpm i
-
-            - run: pnpm start
-
-            - name: Deploy
-              uses: JamesIves/github-pages-deploy-action@v4.5.0
-              with:
-                branch: gh-pages
-                folder: dist
-                token: ${{ secrets.GH_TOKEN }}
-                clean: true
-                clean-exclude: |
-                    robots.txt
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          branch: gh-pages
+          folder: dist
+          token: ${{ secrets.GH_TOKEN }}
+          clean: true
+          clean-exclude: |
+            robots.txt
