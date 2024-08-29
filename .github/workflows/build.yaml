@@ -23,8 +23,10 @@ jobs:
       - name: Prepare the environment
         uses: ./.github/actions/env
 
+      - run: pnpm typecheck
+      - run: pnpm lint
       - run: pnpm start
-
+      
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
