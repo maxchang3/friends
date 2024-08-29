@@ -12,6 +12,7 @@
     "isolatedModules": true
   },
   "exclude": [
-    "dist"
+    "dist",
+    "eslint.config.js"
   ]
 }
