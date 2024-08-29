@@ -1,4 +1,5 @@
 import process from 'node:process'
+import { buffer } from 'node:stream/consumers'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
 
@@ -22,3 +23,5 @@ export const validate = (raw: string) => {
 
     return parsedFriends
 }
+
+export const toNodeBuffer = async (stream: ReadableStream<Uint8Array>) => (await buffer(stream)).buffer
