@@ -16,7 +16,7 @@
 + 网站应有实质性内容、可稳定访问。
 + 独立域名：包括任意付费域名，或符合以下条件：
   + 包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀，如：`github.io`、`vercel.app`、`netlify.app`、`pages.dev`、`js.org` 等。
-  + 其他在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
+  + 部分在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
   + 以下域名不属于「独立域名」范畴：
     + 由 Freenom 公司运营的免费域名后缀。如 `.tk`、`.ml`、`.ga`、`.cf` 等。
     + 不包含在 Public Suffix List 中的后缀，如：~~`gitee.io`~~、`coding.io` 等。
@@ -43,12 +43,12 @@
     "descr": "我的影子想要去飞翔，我的人还在地上。"
   }
   ```
-+ Fork 本仓库，修改 [data/links.json](./data/links.json)，添加你的站点信息（可在 GitHub 直接编辑）。格式如下：
-  ```json
++ Fork 本仓库，修改 [data/links.json](./data/links.json)，添加你的站点信息（可在 GitHub 直接编辑）。格式如下（不包含注释）：
+  ```jsonc
   {
     "name": "站点名称",
-    "link": "https://example.com",
-    "avatar": "https://example.com/favicon.ico",
+    "link": "https://example.com", ：// 站点链接
+    "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
     "descr": "站点描述"
   }
   ```
