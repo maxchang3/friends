@@ -1,4 +1,4 @@
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import sharp from 'sharp'
 import { toNodeBuffer, validate } from './utils'
@@ -32,4 +32,7 @@ await Promise.all(parsedFriends.data.map(async (friend) => {
     friend.avatar = new URL(path.relative(outputDir, filepath), urlPrefix).toString()
 }))
 
-await writeFile(path.join(outputDir, 'links.json'), JSON.stringify(parsedFriends.data), 'utf-8')
+await Promise.all([
+    writeFile(path.join(outputDir, 'links.json'), JSON.stringify(parsedFriends.data), 'utf-8'),
+    copyFile('./assets/logo.svg', path.join(outputDir, 'logo.svg')),
+])
