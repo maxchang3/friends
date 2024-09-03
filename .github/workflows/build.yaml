@@ -36,3 +36,4 @@ jobs:
           clean: true
           clean-exclude: |
             robots.txt
+            index.html
