@@ -47,7 +47,7 @@
   ```jsonc
   {
     "name": "站点名称",
-    "link": "https://example.com", ：// 站点链接
+    "link": "https://example.com", // 站点链接
     "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
     "descr": "站点描述"
   }
