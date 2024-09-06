@@ -3,7 +3,7 @@ import path from 'node:path'
 import sharp from 'sharp'
 import { toNodeBuffer, validate } from './utils'
 
-const urlPrefix = 'https://friends.zhangmaimai.com/'
+const urlPrefix = 'https://friends.maxchang.me/'
 const outputDir = './dist'
 const imgDir = path.join(outputDir, 'img')
 const excludeFormats = ['svg', 'ico']
