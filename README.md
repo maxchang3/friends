@@ -27,16 +27,16 @@
 
   ```yaml
   - name: 张麦麦
-  link: https://zhangmaimai.com
-  avatar: https://zhangmaimai.com/favicon.svg
+  link: https://maxchang.me
+  avatar: https://maxchang.me/favicon.svg
   descr: 我的影子想要去飞翔，我的人还在地上。
   ```
 
   ```json
   {
     "name": "张麦麦",
-    "link": "https://zhangmaimai.com",
-    "avatar": "https://zhangmaimai.com/favicon.svg",
+    "link": "https://maxchang.me",
+    "avatar": "https://maxchang.me/favicon.svg",
     "descr": "我的影子想要去飞翔，我的人还在地上。"
   }
   ```
@@ -51,7 +51,7 @@
   ```
 
 + 提交 Pull Request。等待自动格式检查通过后合并。
-+ 当 PR 合并后，您的站点信息在 12 小时内会出现在 [Friends](https://zhangmaimai.com/friends) 页面。
++ 当 PR 合并后，您的站点信息在 12 小时内会出现在 [Friends](https://maxchang.me/friends) 页面。
 
 ---
 <sub>
