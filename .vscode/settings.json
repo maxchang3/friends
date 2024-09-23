@@ -54,7 +54,8 @@
     "postcss"
   ],
   "[typescript]": {
-    "editor.suggest.showKeywords": false
+    "editor.suggest.showKeywords": false,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[javascript]": {
     "editor.suggest.showKeywords": false
