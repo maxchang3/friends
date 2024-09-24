@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -24,7 +26,6 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-          token: ${{ secrets.GH_TOKEN }}
           clean: true
           clean-exclude: |
             robots.txt
