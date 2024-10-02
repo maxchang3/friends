@@ -31,7 +31,7 @@
     avatar: https://maxchang.me/favicon.svg
     descr: 我的影子想要去飞翔，我的人还在地上。
     ```
-    
+
     ```json
     {
       "name": "张麦麦",
