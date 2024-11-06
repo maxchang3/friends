@@ -60,14 +60,12 @@
   "[javascript]": {
     "editor.suggest.showKeywords": false
   },
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+  "[markdown]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-
   "io-runner.launchInterpreter": {
     "node": "tsx"
   },
-
   "io-runner.launchMap": {
     "ts": ["tsx"]
   }
