@@ -26,24 +26,20 @@
 -   首先你需要添加我的站点到你的友链中。信息如下：
 
     ```yaml
-        - name: 张麦麦
-          link: https://maxchang.me
-          avatar: https://maxchang.me/favicon.svg
-          descr: 我的影子想要去飞翔，我的人还在地上。
+    - name: 张麦麦
+      link: https://maxchang.me
+      avatar: https://maxchang.me/favicon.svg
+      descr: 我的影子想要去飞翔，我的人还在地上。
     ```
-
-    <!--  eslint-disable jsonc/indent -->
 
     ```jsonc
-      {
-        "name": "张麦麦",
-        "link": "https://maxchang.me",
-        "avatar": "https://maxchang.me/favicon.svg",
-        "descr": "我的影子想要去飞翔，我的人还在地上。"
-      }
+    {
+      "name": "张麦麦",
+      "link": "https://maxchang.me",
+      "avatar": "https://maxchang.me/favicon.svg",
+      "descr": "我的影子想要去飞翔，我的人还在地上。"
+    }
     ```
-
-    <!-- eslint-enable jsonc/indent -->
 
 -   Fork 本仓库，修改 [data/links.json](./data/links.json)，添加你的站点信息（可在 GitHub 直接编辑）。格式如下（不包含注释）：
 
