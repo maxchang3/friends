@@ -4,7 +4,11 @@
 
 # Max Chang & Friends 张麦麦和朋友们
 
-嗨！你好！这里是和我交换友情链接的地方。（目前应该没什么人来Orz）
+嗨！你好！这里是和我交换友情链接的地方。
+
+在当下，博客站点日渐减少，而与已认识的人交换友链对我来说机会也不多。
+
+因此，希望借这个机会和大家「先链后友」。
 
 ## 基本要求
 
@@ -12,14 +16,13 @@
 
 -   网站应有实质性内容、可稳定访问。
 -   独立域名：包括任意付费域名，或符合以下条件：
-    -   包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀，如：`github.io`、`vercel.app`、`netlify.app`、`pages.dev`、`js.org` 等。
+    -   包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀。
+        -   如：`github.io`、`vercel.app`、`netlify.app`、`pages.dev`、`js.org` 等。
     -   部分在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
     -   以下域名不属于「独立域名」范畴：
         -   由 Freenom 公司运营的免费域名后缀。如 `.tk`、`.ml`、`.ga`、`.cf` 等。
         -   不包含在 Public Suffix List 中的后缀，如：~~`gitee.io`~~、`coding.io` 等。
 -   网站不包含违法、色情、赌博、暴力、政治等内容。
-
-对于新认识的朋友们，希望借这个机会我们可以「先链后友」。
 
 ## 如何交换友链
 
