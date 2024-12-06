@@ -27,30 +27,38 @@
 
     ```yaml
     - name: 张麦麦
-    link: https://maxchang.me
-    avatar: https://maxchang.me/favicon.svg
-    descr: 我的影子想要去飞翔，我的人还在地上。
+      link: https://maxchang.me
+      avatar: https://maxchang.me/favicon.svg
+      descr: 我的影子想要去飞翔，我的人还在地上。
     ```
 
+    <!--  eslint-disable jsonc/indent -->
+
     ```json
-    {
-      "name": "张麦麦",
-      "link": "https://maxchang.me",
-      "avatar": "https://maxchang.me/favicon.svg",
-      "descr": "我的影子想要去飞翔，我的人还在地上。"
-    }
+      {
+        "name": "张麦麦",
+        "link": "https://maxchang.me",
+        "avatar": "https://maxchang.me/favicon.svg",
+        "descr": "我的影子想要去飞翔，我的人还在地上。"
+      }
     ```
+
+    <!-- eslint-enable jsonc/indent -->
 
 -   Fork 本仓库，修改 [data/links.json](./data/links.json)，添加你的站点信息（可在 GitHub 直接编辑）。格式如下（不包含注释）：
 
+    <!--  eslint-disable jsonc/indent -->
+
     ```jsonc
-    {
-      "name": "站点名称",
-      "link": "https://example.com", // 站点链接
-      "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
-      "descr": "站点描述"
-    }
+        {
+          "name": "站点名称",
+          "link": "https://example.com", // 站点链接
+          "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
+          "descr": "站点描述"
+        }
     ```
+
+    <!-- eslint-enable jsonc/indent -->
 
 -   提交 Pull Request。等待自动格式检查通过后合并。
 -   当 PR 合并后，您的站点信息在 12 小时内会出现在 [Friends](https://maxchang.me/friends) 页面。
