@@ -26,15 +26,15 @@
 -   首先你需要添加我的站点到你的友链中。信息如下：
 
     ```yaml
-    - name: 张麦麦
-      link: https://maxchang.me
-      avatar: https://maxchang.me/favicon.svg
-      descr: 我的影子想要去飞翔，我的人还在地上。
+        - name: 张麦麦
+          link: https://maxchang.me
+          avatar: https://maxchang.me/favicon.svg
+          descr: 我的影子想要去飞翔，我的人还在地上。
     ```
 
     <!--  eslint-disable jsonc/indent -->
 
-    ```json
+    ```jsonc
       {
         "name": "张麦麦",
         "link": "https://maxchang.me",
