@@ -16,16 +16,16 @@
 
 以下是一些基本要求：
 
--   网站应有实质性内容、可稳定访问。
--   独立域名：包括任意付费域名，或符合以下条件：
-    -   包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀。
-        -   如：`github.io`、`vercel.app`、`netlify.app`、`pages.dev`、`js.org` 等。
-    -   部分在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
--   网站不包含违法、色情、赌博、暴力、政治等内容。
+- 网站应有实质性内容、可稳定访问。
+- 独立域名：包括任意付费域名，或符合以下条件：
+    - 包含在 [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat) 中的后缀。
+        - 如：`github.io`、`vercel.app`、`netlify.app`、`pages.dev`、`js.org` 等。
+    - 部分在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
+- 网站不包含违法、色情、赌博、暴力、政治等内容。
 
 ## 如何交换友链
 
--   首先你需要添加我的站点到你的友链中。信息如下：
+- 首先你需要添加我的站点到你的友链中。信息如下：
 
     ```yaml
     - name: 张麦麦
@@ -43,7 +43,7 @@
     }
     ```
 
--   Fork 本仓库，修改 [data/links.json](./data/links.json)，添加你的站点信息（可在 GitHub 直接编辑）。格式如下（不包含注释）：
+- Fork 本仓库，修改 [data/links.json](./data/links.json)，添加你的站点信息（可在 GitHub 直接编辑）。格式如下（不包含注释）：
 
     ```jsonc
     {
@@ -54,8 +54,8 @@
     }
     ```
 
--   提交 Pull Request。等待自动格式检查通过后合并。
--   当 PR 合并后，您的站点信息在 12 小时内会出现在 [Friends](https://maxchang.me/friends) 页面。
+- 提交 Pull Request。等待自动格式检查通过后合并。
+- 当 PR 合并后，您的站点信息在 12 小时内会出现在 [Friends](https://maxchang.me/friends) 页面。
 
 ---
 
