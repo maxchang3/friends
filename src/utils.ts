@@ -24,4 +24,4 @@ export const validate = (raw: string) => {
     return parsedFriends
 }
 
-export const toNodeBuffer = async (stream: ReadableStream<Uint8Array>) => (await buffer(stream)).buffer
+export const toNodeBuffer = async (stream: ReadableStream<Uint8Array>) => (await buffer(stream)).buffer as ArrayBuffer
