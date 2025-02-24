@@ -19,6 +19,7 @@ jobs:
       - name: Prepare the environment
         uses: ./.github/actions/env
 
+      - run: deno run install      
       - run: deno fmt --check
       - run: deno run lint
       - run: deno run start
