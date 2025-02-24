@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
 permissions:
   contents: write
 
@@ -13,14 +15,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Prepare the environment
         uses: ./.github/actions/env
 
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm start
-      
+      - run: deno fmt --check
+      - run: deno run lint
+      - run: deno run start
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
@@ -30,3 +32,4 @@ jobs:
           clean-exclude: |
             robots.txt
             index.html
+

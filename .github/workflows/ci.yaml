@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Prepare the environment
         uses: ./.github/actions/env
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm start
+
+      - run: deno fmt --check
+      - run: deno run lint
+      - run: deno run start

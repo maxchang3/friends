@@ -1,17 +1,12 @@
 name: ENV
 description: Prepare the environment
 
-runs:
-  using: 'composite'
-  steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
-        run_install: true
+env:
+  DENO_DIR: .deno
 
-    - name: Setup node
-      uses: actions/setup-node@v4
+runs:
+  using: "composite"
+  steps:
+    - uses: denoland/setup-deno@v2
       with:
-        node-version: 20
-        cache: pnpm
+        deno-version: v2.x
