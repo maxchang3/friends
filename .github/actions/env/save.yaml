@@ -1,0 +1,13 @@
+name: ENV
+description: Save the environment
+
+env:
+  DENO_DIR: ${{ github.workspace }}/.deno
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache/save@v4
+      with:
+        path: ${{ env.DENO_DIR }}
+        key: ${{ steps.cache.outputs.cache-primary-key }}

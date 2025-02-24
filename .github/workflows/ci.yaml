@@ -18,7 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Prepare the environment
-        uses: ./.github/actions/env
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm start
+        uses: ./.github/actions/prepare
+
+      - run: deno fmt --check
+      - run: deno run lint
+      - run: deno run start
+
+      - name: Save the environment
+        uses: ./.github/actions/save

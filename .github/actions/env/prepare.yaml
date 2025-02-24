@@ -1,0 +1,19 @@
+name: ENV
+description: Prepare the environment
+
+env:
+  DENO_DIR: ${{ github.workspace }}/.deno
+
+runs:
+  using: "composite"
+  steps:
+    - uses: denoland/setup-deno@v2
+    - uses: actions/cache/restore@v4
+      id: cache
+      with:
+        path: ${{ env.DENO_DIR }}
+        key: cache-${{ runner.os }}-test-${{ hashFiles('deno.lock') }}
+        restore-keys: cache-${{ runner.os }}
+    - uses: denoland/setup-deno@v2
+      with:
+        deno-version: v2.x

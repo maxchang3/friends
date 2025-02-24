@@ -13,14 +13,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Prepare the environment
-        uses: ./.github/actions/env
 
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm start
-      
+      - name: Prepare the environment
+        uses: ./.github/actions/prepare
+
+      - run: deno fmt --check
+      - run: deno run lint
+      - run: deno run start
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
@@ -30,3 +30,6 @@ jobs:
           clean-exclude: |
             robots.txt
             index.html
+
+      - name: Save the environment
+        uses: ./.github/actions/save
