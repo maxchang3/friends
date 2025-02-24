@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Prepare the environment
-        uses: ./.github/actions/prepare
+        uses: ./.github/actions/env_prepare
 
       - run: deno fmt --check
       - run: deno run lint
@@ -34,4 +34,4 @@ jobs:
             index.html
 
       - name: Save the environment
-        uses: ./.github/actions/save
+        uses: ./.github/actions/env_save
