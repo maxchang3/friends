@@ -1,10 +1,12 @@
 {
   "nodeModulesDir": "auto",
   "tasks": {
+    "hooks:install": "deno run --allow-read=deno.json,.git/hooks/ --allow-write=.git/hooks/ jsr:@hongminhee/deno-task-hooks",
     "install": "deno install --allow-scripts=npm:sharp",
     "start": "deno run -A main.ts",
     "dev": "deno run --watch main.ts",
-    "lint": "deno lint"
+    "lint": "deno lint",
+    "hooks:pre-commit": "deno check *.ts && deno lint && deno fmt"
   },
   "fmt": {
     "semiColons": false
