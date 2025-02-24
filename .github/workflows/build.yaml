@@ -20,7 +20,7 @@ jobs:
         uses: ./.github/actions/env
 
       - run: deno run install
-      - run: deno check *.ts && deno fmt --check && deno run lint
+      - run: deno run check && deno fmt --check && deno run lint
       - run: deno run start
 
       - name: Deploy
