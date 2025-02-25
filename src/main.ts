@@ -1,5 +1,5 @@
-import * as path from "@std/path"
 import sharp from "sharp"
+import * as path from "@std/path"
 import { assert } from "@std/assert"
 import { readableStreamToBytes, validate } from "./utils.ts"
 
