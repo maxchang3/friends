@@ -3,15 +3,12 @@ import sharp from "npm:sharp"
 import { assert } from "@std/assert"
 import { readableStreamToBytes, validate } from "./utils.ts"
 
-const decoder = new TextDecoder("utf-8")
-const encoder = new TextEncoder()
-
 const urlPrefix = "https://friends.maxchang.me/"
 const outputDir = "./dist"
 const imgDir = path.join(outputDir, "img")
 const excludeFormats = ["svg", "ico"]
 
-const rawContent = decoder.decode(await Deno.readFile("./data/links.json"))
+const rawContent = await Deno.readTextFile("./data/links.json")
 const parsedFriends = validate(rawContent)
 
 try {
@@ -49,9 +46,10 @@ await Promise.all(parsedFriends.data.map(async (friend) => {
     .toString()
 }))
 
-const data = encoder.encode(JSON.stringify(parsedFriends.data))
-
 await Promise.all([
-  Deno.writeFile(path.join(outputDir, "links.json"), data),
+  Deno.writeTextFile(
+    path.join(outputDir, "links.json"),
+    JSON.stringify(parsedFriends.data),
+  ),
   Deno.copyFile("./assets/logo.svg", path.join(outputDir, "logo.svg")),
 ])
