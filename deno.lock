@@ -214,6 +214,7 @@
     "https://deno.land/x/zod@v3.24.2/index.ts": "d27aabd973613985574bc31f39e45cb5d856aa122ef094a9f38a463b8ef1a268",
     "https://deno.land/x/zod@v3.24.2/locales/en.ts": "a7a25cd23563ccb5e0eed214d9b31846305ddbcdb9c5c8f508b108943366ab4c",
     "https://deno.land/x/zod@v3.24.2/mod.ts": "ec6e2b1255c1a350b80188f97bd0a6bac45801bb46fc48f50b9763aa66046039",
+    "https://deno.land/x/zod@v3.24.2/standard-schema.ts": "4abb2e7bd784fb95d219584673971bb317e74fb4fd0c74c196b558ba46df4456",
     "https://deno.land/x/zod@v3.24.2/types.ts": "91f825106bcf5b2ba08daa108283aadc32c0ac332f09c9a90db3d88b142476a3"
   },
   "workspace": {
