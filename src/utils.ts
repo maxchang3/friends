@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { fromError } from "npm:zod-validation-error"
+import { fromError } from "zod-validation-error"
 import { toArrayBuffer } from "@std/streams"
 
 const schema = z.array(
