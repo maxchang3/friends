@@ -13,6 +13,7 @@
     "semiColons": false
   },
   "imports": {
+    "sharp": "npm:sharp@0",
     "zod": "https://deno.land/x/zod@v3.24.2/mod.ts",
     "zod-validation-error": "npm:zod-validation-error@3",
     "@std/assert": "jsr:@std/assert@1",
