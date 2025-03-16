@@ -19,11 +19,16 @@ jobs:
       - name: Prepare the environment
         uses: ./.github/actions/env
 
-      - run: deno run install
-      - run: deno run check && deno fmt --check && deno run lint
-      - run: deno run start
+      - name: Install dependencies
+        run: deno run install
 
-      - name: Deploy
+      - name: Run checks and formatting
+        run: deno run check && deno fmt --check && deno run lint
+
+      - name: Start building
+        run: deno run start
+
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           branch: gh-pages
@@ -32,3 +37,6 @@ jobs:
           clean-exclude: |
             robots.txt
             index.html
+
+      - name: Trigger a Deploy hook
+        run: curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}
