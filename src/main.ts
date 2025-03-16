@@ -8,7 +8,7 @@ const outputDir = "./dist"
 const imgDir = path.join(outputDir, "img")
 const excludeFormats = ["svg", "ico"]
 
-const rawContent = await Deno.readTextFile("./data/links.json")
+const rawContent = await Deno.readTextFile("./data/links.jsonc")
 const parsedFriends = validate(rawContent)
 
 try {

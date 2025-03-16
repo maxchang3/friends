@@ -1,6 +1,7 @@
 import { z } from "zod"
-import { fromError } from "zod-validation-error"
+import { parse } from "@std/jsonc"
 import { toArrayBuffer } from "@std/streams"
+import { fromError } from "zod-validation-error"
 
 const schema = z.array(
   z.object({
@@ -12,8 +13,8 @@ const schema = z.array(
 )
 
 export const validate = (raw: string) => {
-  const json = JSON.parse(raw)
-  const parsedFriends = schema.safeParse(json)
+  const jsonc = parse(raw)
+  const parsedFriends = schema.safeParse(jsonc)
   if (!parsedFriends.success) {
     const validationError = fromError(parsedFriends.error)
     console.error(validationError.message)
