@@ -23,12 +23,12 @@
     "avatar": "https://s2.loli.net/2024/11/06/EDfF4GSbNVjKw12.png",
     "descr": "推开门窗，让阳光雨露洒遍每个角落。"
   },
-  {
-    "name": "陈迪の自留地",
-    "link": "https://blog.chendi.link",
-    "avatar": "https://blog.chendi.link/static/avatar.png",
-    "descr": "偶尔想到的一些内容会做记录，题材不限于技术文章，更多的是一些个人的只言片语。博主平时喜欢运动，以糊代码为乐趣，偶尔也靠读些哲学书籍来打发无聊。"
-  },
+  // {
+  //   "name": "陈迪の自留地",
+  //   "link": "https://blog.chendi.link",
+  //   "avatar": "https://blog.chendi.link/static/avatar.png",
+  //   "descr": "偶尔想到的一些内容会做记录，题材不限于技术文章，更多的是一些个人的只言片语。博主平时喜欢运动，以糊代码为乐趣，偶尔也靠读些哲学书籍来打发无聊。"
+  // },
   {
     "name": "JrHimself",
     "link": "https://jrhim.com",
