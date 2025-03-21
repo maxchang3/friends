@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./assets/logo.svg" width="50%"/>
+<img src="./public/logo.svg" width="50%"/>
 </p>
 
 # Max Chang & Friends 张麦麦和朋友们

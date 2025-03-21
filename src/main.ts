@@ -2,6 +2,7 @@ import sharp from "sharp"
 import * as path from "@std/path"
 import { assert } from "@std/assert"
 import { readableStreamToBytes, validate } from "./utils.ts"
+import { copy } from "@std/fs"
 
 const urlPrefix = "https://friends.maxchang.me/"
 const outputDir = "./dist"
@@ -51,5 +52,5 @@ await Promise.all([
     path.join(outputDir, "links.json"),
     JSON.stringify(parsedFriends.data),
   ),
-  Deno.copyFile("./assets/logo.svg", path.join(outputDir, "logo.svg")),
+  copy("./public", outputDir, { overwrite: true }),
 ])
