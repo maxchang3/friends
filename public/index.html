@@ -235,7 +235,7 @@
       /**
        * @template T
        * @param {T} func
-       * @returns {(...args: Parameters<T>[]) => ReturnType<T>}
+       * @returns {(...args: Parameters<T>) => ReturnType<T>}
        */
       const transition = (func) => (...args) => {
         if (document.startViewTransition) {
