@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://maxchang.me/favicon.svg" />
     <title>Max Chang & Friends</title>
     <style>
       @font-face {
@@ -40,10 +41,27 @@
           Helvetica,
           Arial,
           sans-serif;
+        --bg-color: #f0f0f0;
+        --text-color: #000;
+        --card-bg: #fff;
+        --card-border: #000;
+        --shadow-light: rgba(0, 0, 0, 0.1);
+        --shadow-dark: rgba(0, 0, 0, 0.15);
+        --loading-color: #ccc;
       }
 
-      html,
-      body {
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-color: #1e1e1e;
+          --text-color: #f0f0f0;
+          --card-bg: #2a2a2a;
+          --card-border: #555;
+          --shadow-light: rgba(255, 255, 255, 0.1);
+          --shadow-dark: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      html, body {
         margin: 0;
         padding: 0;
       }
@@ -54,7 +72,9 @@
         align-items: center;
         width: 100vw;
         height: 100vh;
-        background-color: #f0f0f0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        overflow: hidden;
       }
 
       header a {
@@ -76,13 +96,13 @@
         min-width: 30rem;
         min-height: 12rem;
         max-width: 40rem;
-        border: 2px solid #000;
+        border: 2px solid var(--card-border);
         padding: 1.5rem;
         border-radius: 1rem;
-        background-color: #fff;
+        background-color: var(--card-bg);
         transform: rotate(358deg);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transform-origin: center;
+        box-shadow: 0 4px 10px var(--shadow-light);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
         animation: friendEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
           forwards;
         will-change: transform, opacity;
@@ -90,13 +110,14 @@
       }
 
       .friend-card:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 20px var(--shadow-dark);
+        transform: rotate(360deg) scale(1.05);
       }
 
       .friend-link {
         display: contents;
         text-decoration: none;
-        color: #000;
+        color: var(--text-color);
       }
 
       .friend-card .avatar {
@@ -104,14 +125,9 @@
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
-        background: #ccc;
+        background: var(--loading-color);
         object-fit: cover;
         text-indent: -10000px;
-      }
-
-      .friend-card .avatar:not([src]),
-      .friend-card .avatar[src=""] {
-        animation: loading 1.5s infinite linear;
       }
 
       .friend-card .name {
@@ -127,7 +143,7 @@
       .loading {
         width: 80%;
         height: 1.5rem;
-        background-color: #ccc;
+        background-color: var(--loading-color);
         animation: loading 1.5s infinite linear;
         border-radius: 0.5rem;
         margin: 0.5rem 0 !important;
@@ -136,6 +152,11 @@
       .description.loading {
         width: 100%;
         height: 4rem;
+      }
+
+      .friend-card .avatar:not([src]),
+      .friend-card .avatar[src=""] {
+        animation: loading 1.5s infinite linear;
       }
 
       .logo-exit {
@@ -168,7 +189,6 @@
           transform: translateY(0) scale(10) rotate(0deg);
           opacity: 0;
         }
-
         to {
           transform: translateY(-10rem) scale(1) rotate(360deg);
           opacity: 1;
@@ -180,7 +200,6 @@
           opacity: 0;
           transform: translateY(100px) scale(0.8) rotate(5deg);
         }
-
         to {
           opacity: 1;
           transform: translateY(0) scale(1) rotate(358deg);
@@ -191,11 +210,9 @@
         0% {
           opacity: 0.5;
         }
-
         50% {
           opacity: 1;
         }
-
         100% {
           opacity: 0.5;
         }
@@ -204,6 +221,12 @@
       @media (max-width: 600px) {
         :root {
           font-size: 14px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        :root {
+          font-size: 12px;
         }
       }
     </style>
@@ -226,6 +249,44 @@
       </a>
     </main>
     <script type="module">
+      // @ts-check
+      /**
+       * @typedef {{ name: string, link: string, avatar: string, descr: string }} FriendLink
+       * @typedef {{
+       *  loaded: number,
+       *  friends: FriendLink[] | null
+       *  currentIndex: number | null
+       * }} State
+       */
+
+      /** @type {State} */
+      const state = {
+        loaded: 0b00,
+        friends: null,
+        currentIndex: null,
+      }
+
+      const DATA_FETCHED = 0b01
+      const ANIMATION_ENDED = 0b10
+
+      /**
+       * @param {Partial<State>} newState
+       */
+      const setState = (newState) => {
+        Object.assign(state, newState)
+      }
+
+      const effect = () => {
+        if (state.loaded === (DATA_FETCHED | ANIMATION_ENDED)) {
+          setState({
+            currentIndex: randomIndex(
+              /** @type {any[]}*/ (state.friends),
+            ),
+          })
+        }
+        render()
+      }
+
       /**
        * @param {number} ms
        */
@@ -233,9 +294,8 @@
         new Promise((resolve) => setTimeout(resolve, ms))
 
       /**
-       * @template T
-       * @param {T} func
-       * @returns {(...args: Parameters<T>) => ReturnType<T>}
+       * @template T extends (...args: any[]) => void
+       * @returns {(...args: Parameters<T>) => void}
        */
       const transition = (func) => (...args) => {
         if (document.startViewTransition) {
@@ -245,46 +305,86 @@
         }
       }
 
-      const $ = /** @type {typeof document.querySelector} */
+      const $query = /** @type {typeof document.querySelector} */
         (document.querySelector.bind(document))
 
-      const UI = {
-        logo: $("#logo"),
-        friendCard: $("#friendCard"),
-        friendLink: $("#friendLink"),
-        friendAvatar: $("#friendAvatar"),
-        friendName: $("#friendName"),
-        friendDescription: $("#friendDescription"),
-        refreshBtn: $("#refreshBtn"),
+      const getElements = () => {
+        const logo = $query("#logo")
+        const friendCard = $query("#friendCard")
+        const friendLink = $query("#friendLink")
+        const friendAvatar = $query("#friendAvatar")
+        const friendName = $query("#friendName")
+        const friendDescription = $query("#friendDescription")
+        const refreshBtn = $query("#refreshBtn")
+        if (
+          [
+            logo,
+            friendCard,
+            friendLink,
+            friendAvatar,
+            friendName,
+            friendDescription,
+            refreshBtn,
+          ].some((el) => el === null)
+        ) {
+          throw new Error(`Missing element`)
+        }
+        return {
+          logo: /** @type {HTMLElement} */ (logo),
+          friendCard: /** @type {HTMLDivElement} */ (friendCard),
+          friendLink: /** @type {HTMLAnchorElement} */ (friendLink),
+          friendAvatar: /** @type {HTMLImageElement} */ (friendAvatar),
+          friendName: /** @type {HTMLHeadingElement} */ (friendName),
+          friendDescription:
+            /** @type {HTMLParagraphElement} */ (friendDescription),
+          refreshBtn: /** @type {HTMLDivElement} */ (refreshBtn),
+        }
       }
 
-      if (Object.values(UI).some((el) => el === null)) {
-        throw new Error(`Missing element`)
-      }
+      const UI = getElements()
 
-      const res = await fetch("https://friends.maxchang.me/links.json")
+      fetch("https://friends.maxchang.me/links.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setState({
+            loaded: state.loaded | DATA_FETCHED,
+            friends: data,
+          })
+          effect()
+        })
+        .catch((error) => {
+          console.error("Error fetching friend data:", error)
+        })
 
       /**
-       * @typedef {{ name: string, link: string, avatar: string, descr: string }} FriendLink
+       * @param {any[]} arr
+       * @returns {number | null}
        */
-      const friendData = /** @type {FriendLink[]} */ (await res.json())
-
-      const getRandomFriend = () => {
-        if (friendData.length === 0) return
-        const randomIndex = Math.floor(
-          Math.random() * friendData.length,
-        )
-        return friendData[randomIndex]
+      const randomIndex = (arr) => {
+        const length = arr.length
+        if (length === 0) return null
+        return Math.floor(Math.random() * length)
       }
 
-      const displayFriend = transition(async (friend) => {
-        UI.friendCard.style.display = "block"
-        UI.friendName.classList.remove("loading")
-        UI.friendDescription.classList.remove("loading")
-        UI.friendLink.href = friend.link
-        UI.friendName.textContent = friend.name
-        UI.friendAvatar.src = friend.avatar
-        UI.friendDescription.textContent = friend.descr
+      const render = transition(() => {
+        const { friends, loaded } = state
+
+        if (friends !== null && state.currentIndex !== null) {
+          UI.friendAvatar.src = ""
+          const friend = friends[state.currentIndex]
+          UI.friendName.textContent = friend.name
+          UI.friendAvatar.src = friend.avatar
+          UI.friendLink.href = friend.link
+          UI.friendDescription.textContent = friend.descr
+        }
+
+        const isLoading = loaded !== (DATA_FETCHED | ANIMATION_ENDED)
+        UI.friendName.classList.toggle("loading", isLoading)
+        UI.friendDescription.classList.toggle("loading", isLoading)
+        UI.friendCard.style.display =
+          (loaded & ANIMATION_ENDED) === ANIMATION_ENDED
+            ? "block"
+            : "none"
       })
 
       UI.logo.addEventListener("animationend", async () => {
@@ -292,15 +392,17 @@
         UI.logo.style.animation = "logoExit 0.5s ease-out forwards"
         await delay(300)
         UI.logo.style.display = "none"
-        displayFriend(getRandomFriend())
+        setState({ loaded: state.loaded | ANIMATION_ENDED })
+        effect()
       })
 
       UI.refreshBtn.addEventListener("click", async () => {
-        const randomFriend = getRandomFriend()
+        if (state.friends === null) return
+        setState({ currentIndex: randomIndex(state.friends) })
+        effect()
         UI.refreshBtn.style.transform = "rotate(360deg)"
         await delay(300)
         UI.refreshBtn.style.transform = "rotate(0deg)"
-        displayFriend(randomFriend)
       })
     </script>
   </body>
