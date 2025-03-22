@@ -273,16 +273,17 @@
        */
       const setState = (newState) => {
         Object.assign(state, newState)
-        render()
       }
 
       const effect = () => {
-        if (state.loaded !== (DATA_FETCHED | ANIMATION_ENDED)) return
-        setState({
-          currentIndex: randomIndex(
-            /** @type {any[]}*/ (state.friends),
-          ),
-        })
+        if (state.loaded === (DATA_FETCHED | ANIMATION_ENDED)) {
+          setState({
+            currentIndex: randomIndex(
+              /** @type {any[]}*/ (state.friends),
+            ),
+          })
+        }
+        render()
       }
 
       /**
