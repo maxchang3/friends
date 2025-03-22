@@ -256,6 +256,7 @@
        *  loaded: number,
        *  friends: FriendLink[] | null
        *  currentIndex: number | null
+       *  remainingIndices: number[]
        * }} State
        */
 
@@ -264,6 +265,7 @@
         loaded: 0b00,
         friends: null,
         currentIndex: null,
+        remainingIndices: [],
       }
 
       const DATA_FETCHED = 0b01
@@ -277,11 +279,12 @@
       }
 
       const effect = () => {
-        if (state.loaded === (DATA_FETCHED | ANIMATION_ENDED)) {
+        if (
+          state.loaded === (DATA_FETCHED | ANIMATION_ENDED) &&
+          state.currentIndex === null // only trigger when first loaded
+        ) {
           setState({
-            currentIndex: randomIndex(
-              /** @type {any[]}*/ (state.friends),
-            ),
+            currentIndex: randomFriendIndex(),
           })
         }
         render()
@@ -349,6 +352,7 @@
           setState({
             loaded: state.loaded | DATA_FETCHED,
             friends: data,
+            remainingIndices: data.map((_, index) => index),
           })
           effect()
         })
@@ -357,15 +361,26 @@
         })
 
       /**
-       * @param {any[]} arr
-       * @returns {number | null}
+       * Pick a random friend index from the remaining indices,
+       * if the remaining indices are empty, reset it to all indices
        */
-      const randomIndex = (arr) => {
-        const length = arr.length
-        if (length === 0) return null
-        return Math.floor(Math.random() * length)
-      }
+      const randomFriendIndex = () => {
+        if (state.friends === null) return null
 
+        if (state.remainingIndices.length === 0) {
+          setState({
+            remainingIndices: state.friends.map((_, index) => index),
+          })
+        }
+
+        const pool = state.remainingIndices
+        const randomPos = Math.floor(Math.random() * pool.length)
+        const chosen = pool[randomPos]
+
+        pool.splice(randomPos, 1)
+
+        return chosen
+      }
       const render = transition(() => {
         const { friends, loaded } = state
 
@@ -398,7 +413,7 @@
 
       UI.refreshBtn.addEventListener("click", async () => {
         if (state.friends === null) return
-        setState({ currentIndex: randomIndex(state.friends) })
+        setState({ currentIndex: randomFriendIndex() })
         effect()
         UI.refreshBtn.style.transform = "rotate(360deg)"
         await delay(300)
