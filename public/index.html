@@ -307,26 +307,40 @@
       const $query = /** @type {typeof document.querySelector} */
         (document.querySelector.bind(document))
 
-      const UI = {
-        logo: /** @type {HTMLElement} */ ($query("#logo")),
-        friendCard:
-          /** @type {HTMLDivElement} */ ($query("#friendCard")),
-        friendLink:
-          /** @type {HTMLAnchorElement} */ ($query("#friendLink")),
-        friendAvatar:
-          /** @type {HTMLImageElement} */ ($query("#friendAvatar")),
-        friendName:
-          /** @type {HTMLHeadingElement} */ ($query("#friendName")),
-        friendDescription: /** @type {HTMLParagraphElement} */ ($query(
-          "#friendDescription",
-        )),
-        refreshBtn:
-          /** @type {HTMLDivElement} */ ($query("#refreshBtn")),
+      const getElements = () => {
+        const logo = $query("#logo")
+        const friendCard = $query("#friendCard")
+        const friendLink = $query("#friendLink")
+        const friendAvatar = $query("#friendAvatar")
+        const friendName = $query("#friendName")
+        const friendDescription = $query("#friendDescription")
+        const refreshBtn = $query("#refreshBtn")
+        if (
+          [
+            logo,
+            friendCard,
+            friendLink,
+            friendAvatar,
+            friendName,
+            friendDescription,
+            refreshBtn,
+          ].some((el) => el === null)
+        ) {
+          throw new Error(`Missing element`)
+        }
+        return {
+          logo: /** @type {HTMLElement} */ (logo),
+          friendCard: /** @type {HTMLDivElement} */ (friendCard),
+          friendLink: /** @type {HTMLAnchorElement} */ (friendLink),
+          friendAvatar: /** @type {HTMLImageElement} */ (friendAvatar),
+          friendName: /** @type {HTMLHeadingElement} */ (friendName),
+          friendDescription:
+            /** @type {HTMLParagraphElement} */ (friendDescription),
+          refreshBtn: /** @type {HTMLDivElement} */ (refreshBtn),
+        }
       }
 
-      if (Object.values(UI).some((el) => el === null)) {
-        throw new Error(`Missing element`)
-      }
+      const UI = getElements()
 
       fetch("https://friends.maxchang.me/links.json")
         .then((res) => res.json())
