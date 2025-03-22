@@ -40,10 +40,27 @@
           Helvetica,
           Arial,
           sans-serif;
+        --bg-color: #f0f0f0;
+        --text-color: #000;
+        --card-bg: #fff;
+        --card-border: #000;
+        --shadow-light: rgba(0, 0, 0, 0.1);
+        --shadow-dark: rgba(0, 0, 0, 0.15);
+        --loading-color: #ccc;
       }
 
-      html,
-      body {
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-color: #1e1e1e;
+          --text-color: #f0f0f0;
+          --card-bg: #2a2a2a;
+          --card-border: #555;
+          --shadow-light: rgba(255, 255, 255, 0.1);
+          --shadow-dark: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      html, body {
         margin: 0;
         padding: 0;
       }
@@ -54,7 +71,9 @@
         align-items: center;
         width: 100vw;
         height: 100vh;
-        background-color: #f0f0f0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        overflow: hidden;
       }
 
       header a {
@@ -76,13 +95,13 @@
         min-width: 30rem;
         min-height: 12rem;
         max-width: 40rem;
-        border: 2px solid #000;
+        border: 2px solid var(--card-border);
         padding: 1.5rem;
         border-radius: 1rem;
-        background-color: #fff;
+        background-color: var(--card-bg);
         transform: rotate(358deg);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transform-origin: center;
+        box-shadow: 0 4px 10px var(--shadow-light);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
         animation: friendEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
           forwards;
         will-change: transform, opacity;
@@ -90,13 +109,14 @@
       }
 
       .friend-card:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 20px var(--shadow-dark);
+        transform: rotate(360deg) scale(1.05);
       }
 
       .friend-link {
         display: contents;
         text-decoration: none;
-        color: #000;
+        color: var(--text-color);
       }
 
       .friend-card .avatar {
@@ -104,14 +124,9 @@
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
-        background: #ccc;
+        background: var(--loading-color);
         object-fit: cover;
         text-indent: -10000px;
-      }
-
-      .friend-card .avatar:not([src]),
-      .friend-card .avatar[src=""] {
-        animation: loading 1.5s infinite linear;
       }
 
       .friend-card .name {
@@ -127,7 +142,7 @@
       .loading {
         width: 80%;
         height: 1.5rem;
-        background-color: #ccc;
+        background-color: var(--loading-color);
         animation: loading 1.5s infinite linear;
         border-radius: 0.5rem;
         margin: 0.5rem 0 !important;
@@ -136,6 +151,11 @@
       .description.loading {
         width: 100%;
         height: 4rem;
+      }
+
+      .friend-card .avatar:not([src]),
+      .friend-card .avatar[src=""] {
+        animation: loading 1.5s infinite linear;
       }
 
       .logo-exit {
@@ -168,7 +188,6 @@
           transform: translateY(0) scale(10) rotate(0deg);
           opacity: 0;
         }
-
         to {
           transform: translateY(-10rem) scale(1) rotate(360deg);
           opacity: 1;
@@ -180,7 +199,6 @@
           opacity: 0;
           transform: translateY(100px) scale(0.8) rotate(5deg);
         }
-
         to {
           opacity: 1;
           transform: translateY(0) scale(1) rotate(358deg);
@@ -191,11 +209,9 @@
         0% {
           opacity: 0.5;
         }
-
         50% {
           opacity: 1;
         }
-
         100% {
           opacity: 0.5;
         }
@@ -204,6 +220,12 @@
       @media (max-width: 600px) {
         :root {
           font-size: 14px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        :root {
+          font-size: 12px;
         }
       }
     </style>
