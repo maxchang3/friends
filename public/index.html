@@ -226,6 +226,43 @@
       </a>
     </main>
     <script type="module">
+      // @ts-check
+      /**
+       * @typedef {{ name: string, link: string, avatar: string, descr: string }} FriendLink
+       * @typedef {{
+       *  loaded: number,
+       *  friends: FriendLink[] | null
+       *  currentIndex: number | null
+       * }} State
+       */
+
+      /** @type {State} */
+      const state = {
+        loaded: 0b00,
+        friends: null,
+        currentIndex: null,
+      }
+
+      const DATA_FETCHED = 0b01
+      const ANIMATION_ENDED = 0b10
+
+      /**
+       * @param {Partial<State>} newState
+       */
+      const setState = (newState) => {
+        Object.assign(state, newState)
+        render()
+      }
+
+      const effect = () => {
+        if (state.loaded !== (DATA_FETCHED | ANIMATION_ENDED)) return
+        setState({
+          currentIndex: randomIndex(
+            /** @type {any[]}*/ (state.friends),
+          ),
+        })
+      }
+
       /**
        * @param {number} ms
        */
@@ -233,9 +270,8 @@
         new Promise((resolve) => setTimeout(resolve, ms))
 
       /**
-       * @template T
-       * @param {T} func
-       * @returns {(...args: Parameters<T>) => ReturnType<T>}
+       * @template T extends (...args: any[]) => void
+       * @returns {(...args: Parameters<T>) => void}
        */
       const transition = (func) => (...args) => {
         if (document.startViewTransition) {
@@ -245,46 +281,71 @@
         }
       }
 
-      const $ = /** @type {typeof document.querySelector} */
+      const $query = /** @type {typeof document.querySelector} */
         (document.querySelector.bind(document))
 
       const UI = {
-        logo: $("#logo"),
-        friendCard: $("#friendCard"),
-        friendLink: $("#friendLink"),
-        friendAvatar: $("#friendAvatar"),
-        friendName: $("#friendName"),
-        friendDescription: $("#friendDescription"),
-        refreshBtn: $("#refreshBtn"),
+        logo: /** @type {HTMLElement} */ ($query("#logo")),
+        friendCard:
+          /** @type {HTMLDivElement} */ ($query("#friendCard")),
+        friendLink:
+          /** @type {HTMLAnchorElement} */ ($query("#friendLink")),
+        friendAvatar:
+          /** @type {HTMLImageElement} */ ($query("#friendAvatar")),
+        friendName:
+          /** @type {HTMLHeadingElement} */ ($query("#friendName")),
+        friendDescription: /** @type {HTMLParagraphElement} */ ($query(
+          "#friendDescription",
+        )),
+        refreshBtn:
+          /** @type {HTMLDivElement} */ ($query("#refreshBtn")),
       }
 
       if (Object.values(UI).some((el) => el === null)) {
         throw new Error(`Missing element`)
       }
 
-      const res = await fetch("https://friends.maxchang.me/links.json")
+      fetch("https://friends.maxchang.me/links.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setState({
+            loaded: state.loaded | DATA_FETCHED,
+            friends: data,
+          })
+          effect()
+        })
+        .catch((error) => {
+          console.error("Error fetching friend data:", error)
+        })
 
       /**
-       * @typedef {{ name: string, link: string, avatar: string, descr: string }} FriendLink
+       * @param {any[]} arr
+       * @returns {number | null}
        */
-      const friendData = /** @type {FriendLink[]} */ (await res.json())
-
-      const getRandomFriend = () => {
-        if (friendData.length === 0) return
-        const randomIndex = Math.floor(
-          Math.random() * friendData.length,
-        )
-        return friendData[randomIndex]
+      const randomIndex = (arr) => {
+        const length = arr.length
+        if (length === 0) return null
+        return Math.floor(Math.random() * length)
       }
 
-      const displayFriend = transition(async (friend) => {
-        UI.friendCard.style.display = "block"
-        UI.friendName.classList.remove("loading")
-        UI.friendDescription.classList.remove("loading")
-        UI.friendLink.href = friend.link
-        UI.friendName.textContent = friend.name
-        UI.friendAvatar.src = friend.avatar
-        UI.friendDescription.textContent = friend.descr
+      const render = transition(() => {
+        const { friends, loaded } = state
+
+        if (friends !== null && state.currentIndex !== null) {
+          const friend = friends[state.currentIndex]
+          UI.friendName.textContent = friend.name
+          UI.friendAvatar.src = friend.avatar
+          UI.friendLink.href = friend.link
+          UI.friendDescription.textContent = friend.descr
+        }
+
+        const isLoading = loaded !== (DATA_FETCHED | ANIMATION_ENDED)
+        UI.friendName.classList.toggle("loading", isLoading)
+        UI.friendDescription.classList.toggle("loading", isLoading)
+        UI.friendCard.style.display =
+          (loaded & ANIMATION_ENDED) === ANIMATION_ENDED
+            ? "block"
+            : "none"
       })
 
       UI.logo.addEventListener("animationend", async () => {
@@ -292,15 +353,16 @@
         UI.logo.style.animation = "logoExit 0.5s ease-out forwards"
         await delay(300)
         UI.logo.style.display = "none"
-        displayFriend(getRandomFriend())
+        setState({ loaded: state.loaded | ANIMATION_ENDED })
+        effect()
       })
 
       UI.refreshBtn.addEventListener("click", async () => {
-        const randomFriend = getRandomFriend()
+        if (state.friends === null) return
+        setState({ currentIndex: randomIndex(state.friends) })
         UI.refreshBtn.style.transform = "rotate(360deg)"
         await delay(300)
         UI.refreshBtn.style.transform = "rotate(0deg)"
-        displayFriend(randomFriend)
       })
     </script>
   </body>
