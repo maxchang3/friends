@@ -1,307 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Max Chang & Friends</title>
-    <style>
-      @font-face {
-        font-family: Emoji;
-        src:
-          local("Apple Color Emoji"),
-          local("Segoe UI Emoji"),
-          local("Segoe UI Symbol"),
-          local("Noto Color Emoji");
-        unicode-range: U+1F000-1F644, U+203C-3299;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Max Chang & Friends</title>
+  <style>
+    @font-face {
+      font-family: Emoji;
+      src: local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol"), local("Noto Color Emoji");
+      unicode-range: U+1F000-1F644, U+203C-3299;
+    }
+
+    .serif-text {
+      font-family: Palatino, Optima, Georgia, "Songti SC", "Songti TC", "Source Han Serif SC", "Source Han Serif", "STSong", "NSimSun", "SimSun", serif;
+    }
+
+    :root {
+      font-family: system-ui, -apple-system, "Segoe UI", "Roboto", Emoji, Helvetica, Arial, sans-serif;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    header a {
+      display: contents;
+    }
+
+    header img {
+      width: 30rem;
+      transform: translateY(-10rem);
+      animation: logoEnter 1s cubic-bezier(0.075, 0.82, 0.165, 0.7);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+
+    .friend-card {
+      position: relative;
+      display: none;
+      box-sizing: border-box;
+      min-width: 30rem;
+      min-height: 12rem;
+      max-width: 40rem;
+      border: 2px solid #000;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background-color: #fff;
+      transform: rotate(358deg);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transform-origin: center;
+      animation: friendEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+
+    .friend-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .friend-link {
+      display: contents;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .friend-card .avatar {
+      display: block;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      background: #ccc;
+      object-fit: cover;
+      text-indent: -10000px;
+    }
+
+    .friend-card .avatar:not([src]),
+    .friend-card .avatar[src=""] {
+      animation: loading 1.5s infinite linear;
+    }
+
+    .friend-card .name {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .friend-card .description {
+      margin: 0;
+      font-size: 1.2em;
+    }
+
+    .loading {
+      width: 80%;
+      height: 1.5rem;
+      background-color: #ccc;
+      animation: loading 1.5s infinite linear;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0 !important;
+    }
+
+    .description.loading {
+      width: 100%;
+      height: 4rem;
+    }
+
+    .logo-exit {
+      animation: logoExit 0.5s ease-out forwards;
+    }
+
+    .refresh-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .refresh-btn:hover {
+      transform: rotate(90deg);
+    }
+
+    @keyframes logoExit {
+      to {
+        transform: translateY(-20rem) scale(0) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes logoEnter {
+      from {
+        transform: translateY(0) scale(10) rotate(0deg);
+        opacity: 0;
       }
 
-      .serif-text {
-        font-family:
-          Palatino,
-          Optima,
-          Georgia,
-          "Songti SC",
-          "Songti TC",
-          "Source Han Serif SC",
-          "Source Han Serif",
-          "STSong",
-          "NSimSun",
-          "SimSun",
-          serif;
+      to {
+        transform: translateY(-10rem) scale(1) rotate(360deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes friendEnter {
+      from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.8) rotate(5deg);
       }
 
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(358deg);
+      }
+    }
+
+    @keyframes loading {
+      0% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+
+    @media (max-width: 600px) {
       :root {
-        font-family:
-          system-ui,
-          -apple-system,
-          "Segoe UI",
-          "Roboto",
-          Emoji,
-          Helvetica,
-          Arial,
-          sans-serif;
+        font-size: 14px;
       }
+    }
+  </style>
+</head>
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
+<body>
+  <header id="logo">
+    <a href="https://github.com/maxchang3/friends">
+      <img src="./logo.svg" alt="Logo" />
+    </a>
+  </header>
+  <main>
+    <div id="refreshBtn" class="refresh-btn" title="刷新">🔄</div>
+    <a id="friendLink" class="friend-link" href="#" target="_blank">
+      <div id="friendCard" class="friend-card serif-text">
+        <img id="friendAvatar" src="" alt="Avatar" class="avatar" />
+        <h2 id="friendName" class="name loading"></h2>
+        <p id="friendDescription" class="description loading"></p>
+      </div>
+    </a>
+  </main>
+  <script type="module">
+    /**
+     * @param {number} ms
+     */
+    const delay = (ms) =>
+      new Promise((resolve) => setTimeout(resolve, ms))
+
+    /**
+     * @template T
+     * @param {T} func
+     * @returns {(...args: Parameters<T>) => ReturnType<T>}
+     */
+    const transition = (func) => (...args) => {
+      if (document.startViewTransition) {
+        document.startViewTransition(() => func(...args))
+      } else {
+        func(...args)
       }
+    }
 
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100vw;
-        height: 100vh;
-        background-color: #f0f0f0;
-      }
+    const $ = /** @type {typeof document.querySelector} */
+      (document.querySelector.bind(document))
 
-      header a {
-        display: contents;
-      }
+    const UI = {
+      logo: $("#logo"),
+      friendCard: $("#friendCard"),
+      friendLink: $("#friendLink"),
+      friendAvatar: $("#friendAvatar"),
+      friendName: $("#friendName"),
+      friendDescription: $("#friendDescription"),
+      refreshBtn: $("#refreshBtn"),
+    }
 
-      header img {
-        width: 30rem;
-        transform: translateY(-10rem);
-        animation: logoEnter 1s cubic-bezier(0.075, 0.82, 0.165, 0.7);
-        will-change: transform, opacity;
-        backface-visibility: hidden;
-      }
+    if (Object.values(UI).some((el) => el === null)) {
+      throw new Error(`Missing element`)
+    }
 
-      .friend-card {
-        position: relative;
-        display: none;
-        box-sizing: border-box;
-        min-width: 30rem;
-        min-height: 12rem;
-        max-width: 40rem;
-        border: 2px solid #000;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        background-color: #fff;
-        transform: rotate(358deg);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transform-origin: center;
-        animation: friendEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-          forwards;
-        will-change: transform, opacity;
-        backface-visibility: hidden;
-      }
+    const res = await fetch("https://friends.maxchang.me/links.json")
 
-      .friend-card:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      }
+    /**
+     * @typedef {{ name: string, link: string, avatar: string, descr: string }} FriendLink
+     */
+    const friendData = /** @type {FriendLink[]} */ (await res.json())
 
-      .friend-link {
-        display: contents;
-        text-decoration: none;
-        color: #000;
-      }
+    const getRandomFriend = () => {
+      if (friendData.length === 0) return
+      const randomIndex = Math.floor(
+        Math.random() * friendData.length,
+      )
+      return friendData[randomIndex]
+    }
 
-      .friend-card .avatar {
-        display: block;
-        width: 5rem;
-        height: 5rem;
-        border-radius: 50%;
-        background: #ccc;
-        object-fit: cover;
-        text-indent: -10000px;
-      }
+    const displayFriend = transition(async (friend) => {
+      UI.friendCard.style.display = "block"
+      UI.friendName.classList.remove("loading")
+      UI.friendDescription.classList.remove("loading")
+      UI.friendLink.href = friend.link
+      UI.friendName.textContent = friend.name
+      UI.friendAvatar.src = friend.avatar
+      UI.friendDescription.textContent = friend.descr
+    })
 
-      .friend-card .avatar:not([src]),
-      .friend-card .avatar[src=""] {
-        animation: loading 1.5s infinite linear;
-      }
+    UI.logo.addEventListener("animationend", async () => {
+      await delay(1000)
+      UI.logo.style.animation = "logoExit 0.5s ease-out forwards"
+      await delay(300)
+      UI.logo.style.display = "none"
+      displayFriend(getRandomFriend())
+    })
 
-      .friend-card .name {
-        margin: 0;
-        font-size: 2em;
-      }
+    UI.refreshBtn.addEventListener("click", async () => {
+      const randomFriend = getRandomFriend()
+      UI.refreshBtn.style.transform = "rotate(360deg)"
+      await delay(300)
+      UI.refreshBtn.style.transform = "rotate(0deg)"
+      displayFriend(randomFriend)
+    })
+  </script>
+</body>
 
-      .friend-card .description {
-        margin: 0;
-        font-size: 1.2em;
-      }
-
-      .loading {
-        width: 80%;
-        height: 1.5rem;
-        background-color: #ccc;
-        animation: loading 1.5s infinite linear;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0 !important;
-      }
-
-      .description.loading {
-        width: 100%;
-        height: 4rem;
-      }
-
-      .logo-exit {
-        animation: logoExit 0.5s ease-out forwards;
-      }
-
-      .refresh-btn {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        cursor: pointer;
-        font-size: 1.5rem;
-        user-select: none;
-        transition: transform 0.3s ease;
-      }
-
-      .refresh-btn:hover {
-        transform: rotate(90deg);
-      }
-
-      @keyframes logoExit {
-        to {
-          transform: translateY(-20rem) scale(0) rotate(180deg);
-          opacity: 0;
-        }
-      }
-
-      @keyframes logoEnter {
-        from {
-          transform: translateY(0) scale(10) rotate(0deg);
-          opacity: 0;
-        }
-
-        to {
-          transform: translateY(-10rem) scale(1) rotate(360deg);
-          opacity: 1;
-        }
-      }
-
-      @keyframes friendEnter {
-        from {
-          opacity: 0;
-          transform: translateY(100px) scale(0.8) rotate(5deg);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1) rotate(358deg);
-        }
-      }
-
-      @keyframes loading {
-        0% {
-          opacity: 0.5;
-        }
-
-        50% {
-          opacity: 1;
-        }
-
-        100% {
-          opacity: 0.5;
-        }
-      }
-
-      @media (max-width: 600px) {
-        :root {
-          font-size: 14px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <header id="logo">
-      <a href="https://github.com/maxchang3/friends">
-        <img src="./logo.svg" alt="Logo" />
-      </a>
-    </header>
-    <main>
-      <div id="refreshBtn" class="refresh-btn" title="刷新">🔄</div>
-      <a id="friendLink" class="friend-link" href="#" target="_blank">
-        <div id="friendCard" class="friend-card serif-text">
-          <img id="friendAvatar" src="" alt="Avatar" class="avatar" />
-          <h2 id="friendName" class="name loading"></h2>
-          <p id="friendDescription" class="description loading"></p>
-        </div>
-      </a>
-    </main>
-    <script type="module">
-      /**
-       * @param {number} ms
-       */
-      const delay = (ms) =>
-        new Promise((resolve) => setTimeout(resolve, ms))
-
-      /**
-       * @template T
-       * @param {T} func
-       * @returns {(...args: Parameters<T>) => ReturnType<T>}
-       */
-      const transition = (func) => (...args) => {
-        if (document.startViewTransition) {
-          document.startViewTransition(() => func(...args))
-        } else {
-          func(...args)
-        }
-      }
-
-      const $ = /** @type {typeof document.querySelector} */
-        (document.querySelector.bind(document))
-
-      const UI = {
-        logo: $("#logo"),
-        friendCard: $("#friendCard"),
-        friendLink: $("#friendLink"),
-        friendAvatar: $("#friendAvatar"),
-        friendName: $("#friendName"),
-        friendDescription: $("#friendDescription"),
-        refreshBtn: $("#refreshBtn"),
-      }
-
-      if (Object.values(UI).some((el) => el === null)) {
-        throw new Error(`Missing element`)
-      }
-
-      const res = await fetch("https://friends.maxchang.me/links.json")
-
-      /**
-       * @typedef {{ name: string, link: string, avatar: string, descr: string }} FriendLink
-       */
-      const friendData = /** @type {FriendLink[]} */ (await res.json())
-
-      const getRandomFriend = () => {
-        if (friendData.length === 0) return
-        const randomIndex = Math.floor(
-          Math.random() * friendData.length,
-        )
-        return friendData[randomIndex]
-      }
-
-      const displayFriend = transition(async (friend) => {
-        UI.friendCard.style.display = "block"
-        UI.friendName.classList.remove("loading")
-        UI.friendDescription.classList.remove("loading")
-        UI.friendLink.href = friend.link
-        UI.friendName.textContent = friend.name
-        UI.friendAvatar.src = friend.avatar
-        UI.friendDescription.textContent = friend.descr
-      })
-
-      UI.logo.addEventListener("animationend", async () => {
-        await delay(1000)
-        UI.logo.style.animation = "logoExit 0.5s ease-out forwards"
-        await delay(300)
-        UI.logo.style.display = "none"
-        displayFriend(getRandomFriend())
-      })
-
-      UI.refreshBtn.addEventListener("click", async () => {
-        const randomFriend = getRandomFriend()
-        UI.refreshBtn.style.transform = "rotate(360deg)"
-        await delay(300)
-        UI.refreshBtn.style.transform = "rotate(0deg)"
-        displayFriend(randomFriend)
-      })
-    </script>
-  </body>
 </html>
