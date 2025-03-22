@@ -369,6 +369,7 @@
         const { friends, loaded } = state
 
         if (friends !== null && state.currentIndex !== null) {
+          UI.friendAvatar.src = ""
           const friend = friends[state.currentIndex]
           UI.friendName.textContent = friend.name
           UI.friendAvatar.src = friend.avatar
@@ -397,6 +398,7 @@
       UI.refreshBtn.addEventListener("click", async () => {
         if (state.friends === null) return
         setState({ currentIndex: randomIndex(state.friends) })
+        effect()
         UI.refreshBtn.style.transform = "rotate(360deg)"
         await delay(300)
         UI.refreshBtn.style.transform = "rotate(0deg)"
