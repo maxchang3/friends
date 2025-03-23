@@ -19,11 +19,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 2
       - name: Check for changes in `data` or `src`
         id: changes
         run: |
-          if git diff --name-only HEAD^ HEAD | grep -E '^(data|src)/'; then
+          if git log --format='' --name-only -n 1 | grep -E '^(data|src)/'; then
             echo "DATA_CHANGED=true" >> $GITHUB_ENV
           else
             echo "DATA_CHANGED=false" >> $GITHUB_ENV
