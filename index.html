@@ -89,7 +89,7 @@
         backface-visibility: hidden;
       }
 
-      .friend-card {
+      #friendCard {
         position: relative;
         display: none;
         box-sizing: border-box;
@@ -109,18 +109,18 @@
         backface-visibility: hidden;
       }
 
-      .friend-card:hover {
+      #friendCard:hover {
         box-shadow: 0 8px 20px var(--shadow-dark);
         transform: rotate(360deg) scale(1.05);
       }
 
-      .friend-link {
+      #friendLink {
         display: contents;
         text-decoration: none;
         color: var(--text-color);
       }
 
-      .friend-card .avatar {
+      #friendCard .avatar {
         display: block;
         width: 5rem;
         height: 5rem;
@@ -130,12 +130,12 @@
         text-indent: -10000px;
       }
 
-      .friend-card .name {
+      #friendCard .name {
         margin: 0;
         font-size: 2em;
       }
 
-      .friend-card .description {
+      #friendCard .description {
         margin: 0;
         font-size: 1.2em;
       }
@@ -154,8 +154,8 @@
         height: 4rem;
       }
 
-      .friend-card .avatar:not([src]),
-      .friend-card .avatar[src=""] {
+      #friendCard .avatar:not([src]),
+      #friendCard .avatar[src=""] {
         animation: loading 1.5s infinite linear;
       }
 
@@ -163,18 +163,35 @@
         animation: logoExit 0.5s ease-out forwards;
       }
 
-      .refresh-btn {
+      nav {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
         cursor: pointer;
         font-size: 1.5rem;
         user-select: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         transition: transform 0.3s ease;
       }
 
-      .refresh-btn:hover {
+      #refreshBtn {
+        transition: transform 0.3s ease;
+      }
+
+      #refreshBtn:hover {
         transform: rotate(90deg);
+      }
+
+      #friendPageBtn {
+        width: 1em;
+        height: 1em;
+        transition: transform 0.3s ease;
+      }
+
+      #friendPageBtn:hover {
+        transform: scale(1.2);
       }
 
       footer {
@@ -273,10 +290,23 @@
         <img src="./logo.svg" alt="Logo" />
       </a>
     </header>
+    <nav>
+      <div
+        id="friendPageBtn"
+        title="Go to friend page"
+        aria-label="Go to friend page"
+      >
+        <a href="https://maxchang.me/friends">
+          <img src="https://maxchang.me/favicon.svg" alt="🏠" />
+        </a>
+      </div>
+      <div id="refreshBtn" title="Refresh" role="button" aria-label="Refresh">
+        🔄
+      </div>
+    </nav>
     <main>
-      <div id="refreshBtn" class="refresh-btn" title="刷新">🔄</div>
-      <a id="friendLink" class="friend-link" href="#">
-        <div id="friendCard" class="friend-card serif-text">
+      <a id="friendLink" href="#">
+        <div id="friendCard" class="serif-text">
           <img id="friendAvatar" src="" alt="Avatar" class="avatar" />
           <h2 id="friendName" class="name loading"></h2>
           <p id="friendDescription" class="description loading"></p>
