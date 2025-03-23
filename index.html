@@ -177,6 +177,41 @@
         transform: rotate(90deg);
       }
 
+      footer {
+        display: none;
+        position: absolute;
+        background-color: var(--shadow-dark);
+        padding: 1rem;
+        border-radius: 1rem;
+        left: 50%;
+        bottom: 5rem;
+        transform: translateX(-50%);
+        animation: fadeIn 1s ease-in forwards, float 3s infinite;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          bottom: 0;
+        }
+        to {
+          opacity: 1;
+          bottom: 5rem;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(-50%, 0);
+        }
+        50% {
+          transform: translate(-50%, -0.5rem);
+        }
+        100% {
+          transform: translate(-50%, 0);
+        }
+      }
+
       @keyframes logoExit {
         to {
           transform: translateY(-20rem) scale(0) rotate(180deg);
@@ -240,7 +275,7 @@
     </header>
     <main>
       <div id="refreshBtn" class="refresh-btn" title="刷新">🔄</div>
-      <a id="friendLink" class="friend-link" href="#" target="_blank">
+      <a id="friendLink" class="friend-link" href="#">
         <div id="friendCard" class="friend-card serif-text">
           <img id="friendAvatar" src="" alt="Avatar" class="avatar" />
           <h2 id="friendName" class="name loading"></h2>
@@ -248,6 +283,9 @@
         </div>
       </a>
     </main>
+    <footer>
+      Press <kbd>Space</kbd> or <kbd>Enter</kbd> to Jump
+    </footer>
     <script type="module">
       // @ts-check
       /**
@@ -319,6 +357,7 @@
         const friendName = $query("#friendName")
         const friendDescription = $query("#friendDescription")
         const refreshBtn = $query("#refreshBtn")
+        const footer = $query("footer")
         if (
           [
             logo,
@@ -328,6 +367,7 @@
             friendName,
             friendDescription,
             refreshBtn,
+            footer,
           ].some((el) => el === null)
         ) {
           throw new Error(`Missing element`)
@@ -341,6 +381,7 @@
           friendDescription:
             /** @type {HTMLParagraphElement} */ (friendDescription),
           refreshBtn: /** @type {HTMLDivElement} */ (refreshBtn),
+          footer: /** @type {HTMLElement} */ (footer),
         }
       }
 
@@ -407,6 +448,7 @@
         UI.logo.style.animation = "logoExit 0.5s ease-out forwards"
         await delay(300)
         UI.logo.style.display = "none"
+        UI.footer.style.display = "block"
         setState({ loaded: state.loaded | ANIMATION_ENDED })
         effect()
       })
@@ -418,6 +460,16 @@
         UI.refreshBtn.style.transform = "rotate(360deg)"
         await delay(300)
         UI.refreshBtn.style.transform = "rotate(0deg)"
+      })
+
+      document.addEventListener("keydown", async (event) => {
+        if (event.key === " " || event.key === "Enter") {
+          event.preventDefault()
+          if (state.friends === null || state.currentIndex === null) {
+            return
+          }
+          UI.friendLink.click()
+        }
       })
     </script>
   </body>
