@@ -48,8 +48,9 @@
 }
 ```
 
-- Fork 本仓库，修改 [data/links.json](./data/links.json)，添加您的站点信息（可在
-  GitHub 直接编辑）。格式如下（不包含注释）：
+- Fork 本仓库，修改
+  [data/links.json](./data/links.jsonc)，添加您的站点信息（可在 GitHub
+  直接编辑）。格式如下（不包含注释）：
 
 ```jsonc
 {
