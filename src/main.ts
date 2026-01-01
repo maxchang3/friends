@@ -1,56 +1,81 @@
-import sharp from "sharp"
-import * as path from "@std/path"
-import { assert } from "@std/assert"
-import { readableStreamToBytes, validate } from "./utils.ts"
-import { copy } from "@std/fs"
+import * as path from 'node:path'
+import { configure, getAnsiColorFormatter, getConsoleSink, getLogger } from '@logtape/logtape'
+import sharp from 'sharp'
+import linksData from '../data/links.jsonc' with { type: 'jsonc' }
+import { validate } from './utils.ts'
 
-const urlPrefix = "https://friends.maxchang.me/"
-const outputDir = "./dist"
-const imgDir = path.join(outputDir, "img")
-const excludeFormats = ["svg", "ico"]
+await configure({
+  sinks: {
+    console: getConsoleSink({
+      formatter: getAnsiColorFormatter({
+        timestamp: 'time',
+      }),
+    }),
+  },
+  loggers: [
+    { category: 'friends', lowestLevel: 'info', sinks: ['console'] },
+    { category: ['logtape', 'meta'], lowestLevel: 'warning', sinks: ['console'] },
+  ],
+})
 
-const rawContent = await Deno.readTextFile("./data/links.jsonc")
-const parsedFriends = validate(rawContent)
+const logger = getLogger(['friends'])
 
-try {
-  await Deno.remove(outputDir, { recursive: true })
-} catch (err) {
-  if (!(err instanceof Deno.errors.NotFound)) {
-    throw err
-  }
+const urlPrefix = 'https://friends.maxchang.me/'
+const outputDir = './dist'
+const imgDir = path.join(outputDir, 'img')
+const excludeFormats = ['svg', 'ico']
+
+const parsedFriends = validate(linksData)
+
+logger.info('Found {count} friends to process', { count: parsedFriends.data.length })
+
+// Remove old dist directory if it exists
+const distFile = Bun.file(outputDir)
+if (await distFile.exists()) {
+  logger.info('Cleaning old dist directory...')
+  await Bun.$`rm -rf ${outputDir}`
 }
 
-await Deno.mkdir(imgDir, { recursive: true })
+// Create img directory
+logger.info('Creating output directories...')
+await Bun.$`mkdir -p ${imgDir}`
 
-await Promise.all(parsedFriends.data.map(async (friend) => {
-  const filename = new URL(friend.link).hostname.replace(/\./g, "_")
-  const { body: avatarBody } = await fetch(friend.avatar)
+logger.info('Processing friends...')
+await Promise.all(
+  parsedFriends.data.map(async (friend) => {
+    logger.debug('[{name}] Checking link accessibility...', { name: friend.name })
 
-  assert(avatarBody !== null, "Failed to fetch avatar")
+    // Check if the link is accessible
+    try {
+      const res = await fetch(friend.link, { method: 'HEAD' })
+      if (!res.ok) throw new Error(`${friend.name}: Link inaccessible (${res.status} ${res.statusText})`)
+    } catch (error) {
+      throw new Error(`${friend.name}: Link check failed - ${error}`)
+    }
 
-  const isExcluded = excludeFormats.some((format) =>
-    friend.avatar.endsWith(format)
-  )
+    const filename = new URL(friend.link).hostname.replace(/\./g, '_')
 
-  const optimizedImage = isExcluded
-    ? avatarBody
-    : await sharp(await readableStreamToBytes(avatarBody)).resize(100, 100)
-      .png()
-      .toBuffer()
+    const avatarResponse = await fetch(friend.avatar)
 
-  const format = isExcluded ? friend.avatar.split(".").pop() : "png"
-  const filepath = path.join(imgDir, `${filename}.${format}`)
+    const isExcluded = excludeFormats.some((format) => friend.avatar.endsWith(format))
 
-  await Deno.writeFile(filepath, optimizedImage)
+    const avatarBuffer = Buffer.from(await avatarResponse.arrayBuffer())
+    const optimizedImage = isExcluded ? avatarBuffer : await sharp(avatarBuffer).resize(100, 100).png().toBuffer()
 
-  friend.avatar = new URL(path.relative(outputDir, filepath), urlPrefix)
-    .toString()
-}))
+    const format = isExcluded ? friend.avatar.split('.').pop() : 'png'
+    const filepath = path.join(imgDir, `${filename}.${format}`)
 
+    await Bun.write(filepath, optimizedImage)
+
+    friend.avatar = new URL(path.relative(outputDir, filepath), urlPrefix).toString()
+  })
+)
+
+logger.info('Writing links.json...')
+logger.info('Copying public files...')
 await Promise.all([
-  Deno.writeTextFile(
-    path.join(outputDir, "links.json"),
-    JSON.stringify(parsedFriends.data),
-  ),
-  copy("./public", outputDir, { overwrite: true }),
+  Bun.write(path.join(outputDir, 'links.json'), JSON.stringify(parsedFriends.data)),
+  Bun.$`cp -r ./public/* ${outputDir}`,
 ])
+
+logger.info('Build complete!')

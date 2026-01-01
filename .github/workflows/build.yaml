@@ -30,17 +30,18 @@ jobs:
             echo "DATA_CHANGED=false" >> $GITHUB_ENV
           fi
 
-      - name: Prepare the environment
-        uses: ./.github/actions/env
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Install dependencies
-        run: deno run install
+        run: bun install
 
-      - name: Run checks and formatting
-        run: deno run check && deno fmt --check && deno run lint
+      - name: Run checks
+        run: bun run check
 
-      - name: Start building
-        run: deno run start
+      - name: Build
+        run: bun run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.5.0
