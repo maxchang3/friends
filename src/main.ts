@@ -1,6 +1,7 @@
 import * as path from 'node:path'
 import { configure, getAnsiColorFormatter, getConsoleSink, getLogger } from '@logtape/logtape'
 import sharp from 'sharp'
+import config from '../data/config.jsonc' with { type: 'jsonc' }
 import linksData from '../data/links.jsonc' with { type: 'jsonc' }
 import { validate } from './utils.ts'
 
@@ -43,14 +44,19 @@ await Bun.$`mkdir -p ${imgDir}`
 logger.info('Processing friends...')
 await Promise.all(
   parsedFriends.data.map(async (friend) => {
-    logger.debug('[{name}] Checking link accessibility...', { name: friend.name })
+    const hostname = new URL(friend.link).hostname
+    const isIgnored = config.ignoredDomains?.includes(hostname)
 
-    // Check if the link is accessible
-    try {
-      const res = await fetch(friend.link, { method: 'HEAD' })
-      if (!res.ok) throw new Error(`${friend.name}: Link inaccessible (${res.status} ${res.statusText})`)
-    } catch (error) {
-      throw new Error(`${friend.name}: Link check failed - ${error}`)
+    if (isIgnored) {
+      logger.info('{name} Skipping link check (domain ignored)', { name: friend.name })
+    } else {
+      // Check if the link is accessible
+      try {
+        const res = await fetch(friend.link, { method: 'HEAD' })
+        if (!res.ok) throw new Error(`${friend.name}: Link inaccessible (${res.status} ${res.statusText})`)
+      } catch (error) {
+        throw new Error(`${friend.name}: Link check failed - ${error}`)
+      }
     }
 
     const filename = new URL(friend.link).hostname.replace(/\./g, '_')
