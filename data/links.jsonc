@@ -11,18 +11,20 @@
     "avatar": "https://cdn.jsdelivr.net/gh/youngjuning/images@main/1687969566388.png",
     "descr": "怕什么真理无穷，进一寸有一寸的欢喜。"
   },
-  {
-    "name": "LS-Shandong",
-    "link": "https://ls-shandong.codeberg.page",
-    "avatar": "https://ls-shandong.codeberg.page/avatar.png",
-    "descr": "LS-Shandong 的博客网站"
-  },
+  // Could not access the site
+  // {
+  //   "name": "LS-Shandong",
+  //   "link": "https://ls-shandong.codeberg.page",
+  //   "avatar": "https://ls-shandong.codeberg.page/avatar.png",
+  //   "descr": "LS-Shandong 的博客网站"
+  // },
   {
     "name": "Shuai's Hut",
     "link": "https://shuaiyuu.github.io",
     "avatar": "https://s2.loli.net/2024/11/06/EDfF4GSbNVjKw12.png",
     "descr": "推开门窗，让阳光雨露洒遍每个角落。"
   },
+  // Could not access the site
   // {
   //   "name": "陈迪の自留地",
   //   "link": "https://blog.chendi.link",
