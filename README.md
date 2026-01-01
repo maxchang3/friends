@@ -2,71 +2,80 @@
 <img src="./public/logo.svg" width="50%"/>
 </p>
 
-# Max Chang & Friends 张麦麦和朋友们
+[简体中文](./README.zh-CN.md)
 
-嗨，你好！这里是和我交换友情链接的地方。 :)
+# Max Chang & Friends
 
-如果我们还未有过交流的话，很高兴能通过这个机会认识你！
+Hi there! This is where you can exchange friend links with me. :)
 
-在如今独立博客式微、移动互联网的时代，友情链接的意义似乎更加重要了。
+If we haven't interacted before, I'm glad to get to know you through this
+opportunity!
 
-虽然常说「先友后链」，但与我而言，与已认识的人交换友链的机会并不多。
+In today's era of declining independent blogs and mobile internet dominance, the
+meaning of friend links seems to be more important than ever.
 
-因此，希望借这个机会和大家「先链后友」，建立彼此之间的链接。
+Although it's often said "friendship first, then links", for me, there aren't
+many opportunities to exchange friend links with people I already know.
 
-## 基本要求
+Therefore, I hope to take this opportunity to "link first, then friendship",
+establishing connections between us.
 
-以下是一些基本要求：
+## Basic Requirements
 
-- 网站应有实质性内容、可稳定访问。
-- 独立域名：包括任意付费域名，或符合以下条件：
-  - 包含在
-    [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat)
-    中的后缀。
+Here are some basic requirements:
 
-    - 如：`github.io`、`vercel.app`、`netlify.app`、`pages.dev`、`js.org` 等。
-  - 部分在线内容托管服务的子域名，如：`wordpress.com`、`wodemo.com` 。
-- 网站不包含违法、色情、赌博、暴力、政治等内容。
+- The website should have substantial content and be stably accessible.
+- Independent domain: Including any paid domain, or domains that meet the
+  following conditions:
+  - Suffixes included in the
+    [Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat).
+    - Such as: `github.io`, `vercel.app`, `netlify.app`, `pages.dev`, `js.org`,
+      etc.
+  - Subdomains of some online content hosting services, such as:
+    `wordpress.com`, `wodemo.com`.
+- The website does not contain illegal, pornographic, gambling, violent,
+  political, or similar content.
 
-## 如何交换友链
+## How to Exchange Friend Links
 
-- 首先您需要添加我的站点到您的友链中。信息如下：
+- First, you need to add my site to your friend links. Information as follows:
 
 ```yaml
-- name: 张麦麦
+- name: Max Chang
   link: https://maxchang.me
   avatar: https://maxchang.me/favicon.svg
-  descr: 我的影子想要去飞翔，我的人还在地上。
+  descr: My shadow wants to fly, but I'm still on the ground.
 ```
 
 ```jsonc
 {
-  "name": "张麦麦",
+  "name": "Max Chang",
   "link": "https://maxchang.me",
   "avatar": "https://maxchang.me/favicon.svg",
-  "descr": "我的影子想要去飞翔，我的人还在地上。"
+  "descr": "My shadow wants to fly, but I'm still on the ground."
 }
 ```
 
-- Fork 本仓库，修改
-  [data/links.json](./data/links.jsonc)，添加您的站点信息（可在 GitHub
-  直接编辑）。格式如下（不包含注释）：
+- Fork this repository, modify [data/links.json](./data/links.jsonc), and add
+  your site information (you can edit it directly on GitHub). Format as follows
+  (without comments):
 
 ```jsonc
 {
-  "name": "站点名称",
-  "link": "https://example.com", // 站点链接
-  "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
-  "descr": "站点描述" // 一句话简介：20~30 字为宜
+  "name": "Site Name",
+  "link": "https://example.com", // Site link
+  "avatar": "https://example.com/favicon.ico", // Site avatar (icon)
+  "descr": "Site description" // One-line introduction: 20-30 characters recommended
 }
 ```
 
-- 提交 Pull Request。等待自动格式检查通过后合并。
-- 当 PR 合并后，您的站点信息稍候就会出现在
-  [Friends](https://maxchang.me/friends) 页面。
+- Submit a Pull Request. Wait for automatic format checks to pass and then
+  merge.
+- After the PR is merged, your site information will appear on the
+  [Friends](https://maxchang.me/friends) page shortly.
 
 ---
 
 <sub>
-* 很大程度上受到了 <a href="https://github.com/SukkaW/Friends">SukkaW/Friends</a> 的启发，部分内容和代码借鉴了该仓库的内容。
+* Largely inspired by <a href="https://github.com/SukkaW/Friends">SukkaW/Friends</a>, some content and code are borrowed from that repository.
 </sub>
