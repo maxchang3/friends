@@ -43,7 +43,7 @@ Here are some basic requirements:
 ```yaml
 - name: Max Chang
   link: https://maxchang.me
-  avatar: https://maxchang.me/favicon.svg
+  avatar: https://avatars.githubusercontent.com/u/36927158?v=4
   descr: My shadow wants to fly, but I'm still on the ground.
 ```
 
@@ -51,7 +51,7 @@ Here are some basic requirements:
 {
   "name": "Max Chang",
   "link": "https://maxchang.me",
-  "avatar": "https://maxchang.me/favicon.svg",
+  "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
   "descr": "My shadow wants to fly, but I'm still on the ground."
 }
 ```
