@@ -1,5 +1,22 @@
+import { configure, getAnsiColorFormatter, getConsoleSink, getLogger } from '@logtape/logtape'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
+
+await configure({
+  sinks: {
+    console: getConsoleSink({
+      formatter: getAnsiColorFormatter({
+        timestamp: 'time',
+      }),
+    }),
+  },
+  loggers: [
+    { category: 'friends', lowestLevel: 'info', sinks: ['console'] },
+    { category: ['logtape', 'meta'], lowestLevel: 'warning', sinks: ['console'] },
+  ],
+})
+
+export const logger = getLogger(['friends'])
 
 const schema = z.array(
   z.object({

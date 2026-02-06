@@ -1,25 +1,8 @@
 import * as path from 'node:path'
-import { configure, getAnsiColorFormatter, getConsoleSink, getLogger } from '@logtape/logtape'
 import sharp from 'sharp'
 import config from '../data/config.jsonc' with { type: 'jsonc' }
 import linksData from '../data/links.jsonc' with { type: 'jsonc' }
-import { validate } from './utils.ts'
-
-await configure({
-  sinks: {
-    console: getConsoleSink({
-      formatter: getAnsiColorFormatter({
-        timestamp: 'time',
-      }),
-    }),
-  },
-  loggers: [
-    { category: 'friends', lowestLevel: 'info', sinks: ['console'] },
-    { category: ['logtape', 'meta'], lowestLevel: 'warning', sinks: ['console'] },
-  ],
-})
-
-const logger = getLogger(['friends'])
+import { logger, validate } from './utils.ts'
 
 const urlPrefix = 'https://friends.maxchang.me/'
 const outputDir = './dist'
