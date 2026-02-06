@@ -22,6 +22,7 @@ const schema = z.array(
   z.object({
     name: z.string(),
     link: z.url(),
+    rss: z.url().optional(),
     avatar: z.url(),
     descr: z.string(),
   })

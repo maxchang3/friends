@@ -45,6 +45,7 @@ Here are some basic requirements:
   link: https://maxchang.me
   avatar: https://avatars.githubusercontent.com/u/36927158?v=4
   descr: My shadow wants to fly, but I'm still on the ground.
+  rss: https://maxchang.me/rss.xml
 ```
 
 ```jsonc
@@ -52,7 +53,8 @@ Here are some basic requirements:
   "name": "Max Chang",
   "link": "https://maxchang.me",
   "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
-  "descr": "My shadow wants to fly, but I'm still on the ground."
+  "descr": "My shadow wants to fly, but I'm still on the ground.",
+  "rss": "https://maxchang.me/rss.xml"
 }
 ```
 
@@ -66,6 +68,7 @@ Here are some basic requirements:
   "link": "https://example.com", // Site link
   "avatar": "https://example.com/favicon.ico", // Site avatar (icon)
   "descr": "Site description" // One-line introduction: 20-30 characters recommended
+  // "rss": "https://example.com/rss.xml" // Optional: RSS feed link
 }
 ```
 

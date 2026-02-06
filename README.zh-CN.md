@@ -37,6 +37,7 @@
   link: https://maxchang.me
   avatar: https://avatars.githubusercontent.com/u/36927158?v=4
   descr: 我的影子想要去飞翔，我的人还在地上。
+  rss: https://maxchang.me/rss.xml
 ```
 
 ```jsonc
@@ -44,7 +45,8 @@
   "name": "张麦麦",
   "link": "https://maxchang.me",
   "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
-  "descr": "我的影子想要去飞翔，我的人还在地上。"
+  "descr": "我的影子想要去飞翔，我的人还在地上。",
+  "rss": "https://maxchang.me/rss.xml"
 }
 ```
 
@@ -58,6 +60,7 @@
   "link": "https://example.com", // 站点链接
   "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
   "descr": "站点描述" // 一句话简介：20~30 字为宜
+  // "rss": "https://example.com/rss.xml" // 可选项：RSS 订阅链接
 }
 ```
 

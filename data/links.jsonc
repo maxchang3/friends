@@ -3,7 +3,8 @@
     "name": "汐涌及岸",
     "link": "https://coderxi.com",
     "avatar": "https://coderxi.com/avatar.png",
-    "descr": "盛年不重来，一日难再晨。及时当勉励，岁月不待人。"
+    "descr": "盛年不重来，一日难再晨。及时当勉励，岁月不待人。",
+    "rss": "https://coderxi.com/rss.xml"
   },
   // Could not access the site
   // {
@@ -36,12 +37,14 @@
     "name": "JrHimself",
     "link": "https://jrhim.com",
     "avatar": "https://avatars.githubusercontent.com/u/64763790",
-    "descr": "石头和郁金香长在他头颅"
+    "descr": "石头和郁金香长在他头颅",
+    "rss": "https://jrhim.com/rss.xml"
   },
   {
     "name": "Nick's Blog",
     "link": "https://nickchen.top",
     "avatar": "https://nickchen.top/avatar.webp",
-    "descr": "越平静，越汹涌"
+    "descr": "越平静，越汹涌",
+    "rss": "https://nickchen.top/rss.xml"
   }
 ]
