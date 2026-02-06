@@ -7,7 +7,7 @@
     "check": "bun run biome check .",
     "dev": "bun run --watch src/main.ts",
     "format": "bun run biome format --write .",
-    "build": "bun run src/main.ts"
+    "start": "bun run src/main.ts"
   },
   "dependencies": {
     "@logtape/logtape": "^2.0.2",

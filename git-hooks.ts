@@ -1,7 +1,7 @@
 import type { GitHooksConfig } from 'bun-git-hooks'
 
 const config: GitHooksConfig = {
-  'pre-commit': 'bun run check',
+  'pre-commit': 'bun check',
 }
 
 export default config
