@@ -69,10 +69,10 @@
 
       header img {
         width: 30rem;
-        transform: translateY(-10rem);
         animation: logoEnter 1s cubic-bezier(0.075, 0.82, 0.165, 0.7);
         will-change: transform, opacity;
         backface-visibility: hidden;
+        transform: translate3d(0, -10rem, 0);
       }
 
       #friendCard {
@@ -86,18 +86,18 @@
         padding: 1.5rem;
         border-radius: 1rem;
         background-color: var(--card-bg);
-        transform: rotate(358deg);
         box-shadow: 0 4px 10px var(--shadow-light);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         animation: friendEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
           forwards;
         will-change: transform, opacity;
         backface-visibility: hidden;
+        transform: translate3d(0, 0, 0) rotate(358deg);
       }
 
       #friendCard:hover {
         box-shadow: 0 8px 20px var(--shadow-dark);
-        transform: rotate(360deg) scale(1.05);
+        transform: translate3d(0, 0, 0) rotate(360deg) scale(1.05);
       }
 
       #friendLink {
@@ -160,24 +160,33 @@
         align-items: center;
         gap: 1rem;
         transition: transform 0.3s ease;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
       }
 
       #refreshBtn {
         transition: transform 0.3s ease;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
       }
 
       #refreshBtn:hover {
-        transform: rotate(90deg);
+        transform: rotate(90deg) translateZ(0);
       }
 
       #friendPageBtn {
         width: 1em;
         height: 1em;
         transition: transform 0.3s ease;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
       }
 
       #friendPageBtn:hover {
-        transform: scale(1.2);
+        transform: scale(1.2) translateZ(0);
       }
 
       footer {
@@ -190,47 +199,49 @@
         left: 50%;
         bottom: 5rem;
         width: 15em;
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
         animation: fadeIn 1s ease-in forwards, float 3s infinite;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
       }
 
       @keyframes fadeIn {
         from {
           opacity: 0;
-          bottom: 0;
+          transform: translate3d(-50%, 100%, 0);
         }
         to {
           opacity: 1;
-          bottom: 5rem;
+          transform: translate3d(-50%, 0, 0);
         }
       }
 
       @keyframes float {
         0% {
-          transform: translate(-50%, 0);
+          transform: translate3d(-50%, 0, 0);
         }
         50% {
-          transform: translate(-50%, -0.5rem);
+          transform: translate3d(-50%, -0.5rem, 0);
         }
         100% {
-          transform: translate(-50%, 0);
+          transform: translate3d(-50%, 0, 0);
         }
       }
 
       @keyframes logoExit {
         to {
-          transform: translateY(-20rem) scale(0) rotate(180deg);
+          transform: translate3d(0, -20rem, 0) scale(0) rotate(180deg);
           opacity: 0;
         }
       }
 
       @keyframes logoEnter {
         from {
-          transform: translateY(0) scale(10) rotate(0deg);
+          transform: translate3d(0, 0, 0) scale(10) rotate(0deg);
           opacity: 0;
         }
         to {
-          transform: translateY(-10rem) scale(1) rotate(360deg);
+          transform: translate3d(0, -10rem, 0) scale(1) rotate(360deg);
           opacity: 1;
         }
       }
@@ -238,11 +249,11 @@
       @keyframes friendEnter {
         from {
           opacity: 0;
-          transform: translateY(100px) scale(0.8) rotate(5deg);
+          transform: translate3d(0, 100px, 0) scale(0.8) rotate(5deg);
         }
         to {
           opacity: 1;
-          transform: translateY(0) scale(1) rotate(358deg);
+          transform: translate3d(0, 0, 0) scale(1) rotate(358deg);
         }
       }
 
