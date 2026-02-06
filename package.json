@@ -7,7 +7,8 @@
     "check": "bun run biome check .",
     "dev": "bun run --watch src/main.ts",
     "format": "bun run biome format --write .",
-    "start": "bun run src/main.ts"
+    "start": "bun run src/main.ts",
+    "preview": "bun ./dist/index.html"
   },
   "dependencies": {
     "cli-progress": "^3.12.0",
