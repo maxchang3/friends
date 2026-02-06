@@ -4,8 +4,8 @@ import { fromError } from 'zod-validation-error'
 const schema = z.array(
   z.object({
     name: z.string(),
-    link: z.string().url(),
-    avatar: z.string().url(),
+    link: z.url(),
+    avatar: z.url(),
     descr: z.string(),
   })
 )
