@@ -1,7 +1,8 @@
+import * as path from 'node:path'
 import logger from 'consola'
+import sharp from 'sharp'
 import config from './data/config.jsonc' with { type: 'jsonc' }
 import type { Friend } from './schema'
-import { optimizeImage } from './utils'
 
 export const validateFriendLink = async (friend: Friend) => {
   const hostname = new URL(friend.link).hostname
@@ -25,18 +26,24 @@ export const processFriendAvatar = async (friend: Friend) => {
   const excludeFormats = ['svg', 'ico']
 
   const avatarResponse = await fetch(friend.avatar)
-  const isExcluded = excludeFormats.some((format) => friend.avatar.endsWith(format))
-
   if (!avatarResponse.ok) {
     throw new Error(
       `${friend.name}: Failed to fetch avatar (${avatarResponse.status} ${avatarResponse.statusText})`
     )
   }
 
-  const { optimizedImage, format } = await optimizeImage(avatarResponse, isExcluded)
+  const avatarBuffer = Buffer.from(await avatarResponse.arrayBuffer())
+  const ext = path.extname(new URL(friend.avatar).pathname).slice(1).toLowerCase()
+  const isExcluded = excludeFormats.includes(ext)
+
+  const optimizedImage = isExcluded
+    ? avatarBuffer
+    : await sharp(avatarBuffer).resize(100, 100).png().toBuffer()
+
+  const finalExt = isExcluded ? ext || 'bin' : 'png'
 
   return {
-    filename: `${name}.${format}`,
+    filename: `${name}.${finalExt}`,
     optimizedImage,
   }
 }
