@@ -1,6 +1,7 @@
 import logger from 'consola'
-import config from '../data/config.jsonc' with { type: 'jsonc' }
+import config from './data/config.jsonc' with { type: 'jsonc' }
 import type { Friend } from './schema'
+import { optimizeImage } from './utils'
 
 export const validateFriendLink = async (friend: Friend) => {
   const hostname = new URL(friend.link).hostname
@@ -20,15 +21,22 @@ export const validateFriendLink = async (friend: Friend) => {
 }
 
 export const processFriendAvatar = async (friend: Friend) => {
-  const filename = new URL(friend.link).hostname.replace(/\./g, '_')
+  const name = new URL(friend.link).hostname.replace(/\./g, '_')
   const excludeFormats = ['svg', 'ico']
 
   const avatarResponse = await fetch(friend.avatar)
   const isExcluded = excludeFormats.some((format) => friend.avatar.endsWith(format))
 
+  if (!avatarResponse.ok) {
+    throw new Error(
+      `${friend.name}: Failed to fetch avatar (${avatarResponse.status} ${avatarResponse.statusText})`
+    )
+  }
+
+  const { optimizedImage, format } = await optimizeImage(avatarResponse, isExcluded)
+
   return {
-    filename,
-    isExcluded,
-    avatarResponse,
+    filename: `${name}.${format}`,
+    optimizedImage,
   }
 }

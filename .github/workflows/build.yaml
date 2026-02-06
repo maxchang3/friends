@@ -9,6 +9,8 @@ on:
       - "data/**"
       - "public/**"
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"  # Runs at 00:00 every day
 
 permissions:
   contents: write

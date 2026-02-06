@@ -1,3 +1,4 @@
+import type { GenericBar } from 'cli-progress'
 import sharp from 'sharp'
 import { fromError } from 'zod-validation-error'
 import { friendSchema } from './schema'
@@ -21,4 +22,23 @@ export const optimizeImage = async (avatarResponse: Response, isExcluded: boolea
   const format = isExcluded ? avatarResponse.url.split('.').pop()?.split('?')[0] : 'png'
 
   return { optimizedImage, format }
+}
+
+export const useProgressBar = (bar: GenericBar, total: number) => {
+  bar.start(total, 0)
+
+  const runTask = async <T>(fn: () => Promise<T>): Promise<T> => {
+    try {
+      return await fn()
+    } finally {
+      bar.increment()
+    }
+  }
+  return {
+    increment: () => bar.increment(),
+    runTask,
+    [Symbol.dispose]() {
+      bar.stop()
+    },
+  }
 }

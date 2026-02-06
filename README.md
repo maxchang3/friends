@@ -58,7 +58,7 @@ Here are some basic requirements:
 }
 ```
 
-- Fork this repository, modify [data/links.json](./data/links.jsonc), and add
+- Fork this repository, modify [src/data/links.json](./src/data/links.jsonc), and add
   your site information (you can edit it directly on GitHub). Format as follows
   (without comments):
 
