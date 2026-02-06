@@ -10,7 +10,10 @@
     "start": "bun run src/main.ts"
   },
   "dependencies": {
-    "@logtape/logtape": "^2.0.2",
+    "cli-progress": "^3.12.0",
+    "consola": "^3.4.2",
+    "p-limit": "^7.3.0",
+    "rss-parser": "^3.13.0",
     "sharp": "^0.34.5",
     "zod": "^4.3.6",
     "zod-validation-error": "^5.0.0"
@@ -19,6 +22,7 @@
     "@biomejs/biome": "^2.3.14",
     "@maxchang/biome-config": "^0.1.7",
     "@types/bun": "latest",
+    "@types/cli-progress": "^3.11.6",
     "bun-git-hooks": "^0.3.1"
   }
 }
