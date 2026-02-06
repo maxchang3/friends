@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - "src/**"
-      - "data/**"
       - "public/**"
   workflow_dispatch:
   schedule:
@@ -23,10 +22,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: Check for changes in `data` or `src`
+      - name: Check for changes in `src`
         id: changes
         run: |
-          if git log --format='' --name-only -n 1 | grep -E '^(data|src)/'; then
+          if git log --format='' --name-only -n 1 | grep -E '^src/'; then
             echo "DATA_CHANGED=true" >> $GITHUB_ENV
           else
             echo "DATA_CHANGED=false" >> $GITHUB_ENV
@@ -46,12 +45,11 @@ jobs:
         run: bun start
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
           folder: dist
           clean: true
 
       - name: Trigger a Deploy hook
-        if: env.DATA_CHANGED == 'true'
+        if: env.DATA_CHANGED == 'true' && s env.deployment_status == 'success'
         run: curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}
