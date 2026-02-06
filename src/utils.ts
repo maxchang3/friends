@@ -24,8 +24,22 @@ export const optimizeImage = async (avatarResponse: Response, isExcluded: boolea
   return { optimizedImage, format }
 }
 
-export const useProgressBar = (bar: GenericBar, total: number) => {
-  bar.start(total, 0)
+type Bar = {
+  increment: () => void
+  runTask: <T>(fn: () => Promise<T>) => Promise<T>
+  start: GenericBar['start']
+  stop: GenericBar['stop']
+  [Symbol.dispose]: () => void
+}
+
+/**
+ * Use a progress bar with automatic start/stop and task wrapping
+ */
+function useProgressBar(bar: GenericBar, options: { total: number; startOnInit: true }): Bar
+function useProgressBar(bar: GenericBar, options?: { startOnInit: false }): Bar
+function useProgressBar(bar: GenericBar, options: { total?: number; startOnInit?: boolean } = {}) {
+  const { total, startOnInit = false } = options
+  if (startOnInit) bar.start(total!, 0)
 
   const runTask = async <T>(fn: () => Promise<T>): Promise<T> => {
     try {
@@ -37,11 +51,15 @@ export const useProgressBar = (bar: GenericBar, total: number) => {
   return {
     increment: () => bar.increment(),
     runTask,
+    start: bar.start.bind(bar),
+    stop: bar.stop.bind(bar),
     [Symbol.dispose]() {
       bar.stop()
     },
   }
 }
+
+export { useProgressBar }
 
 export const useTimer = (callback: (duration: number) => void) => {
   const start = Date.now()

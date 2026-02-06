@@ -20,7 +20,10 @@ const processAllFriends = async (friends: Friend[]) => {
       },
       cliProgress.Presets.shades_classic
     ),
-    friends.length
+    {
+      total: friends.length,
+      startOnInit: true,
+    }
   )
 
   const processFriendTask = async (friend: Friend) =>
