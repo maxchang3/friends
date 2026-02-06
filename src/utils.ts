@@ -40,17 +40,15 @@ function useProgressBar(bar: GenericBar, options?: { startOnInit: false }): Bar
 function useProgressBar(bar: GenericBar, options: { total?: number; startOnInit?: boolean } = {}) {
   const { total, startOnInit = false } = options
   if (startOnInit) bar.start(total!, 0)
-
-  const runTask = async <T>(fn: () => Promise<T>): Promise<T> => {
-    try {
-      return await fn()
-    } finally {
-      bar.increment()
-    }
-  }
   return {
     increment: () => bar.increment(),
-    runTask,
+    runTask: async <T>(fn: () => Promise<T>): Promise<T> => {
+      try {
+        return await fn()
+      } finally {
+        bar.increment()
+      }
+    },
     start: bar.start.bind(bar),
     stop: bar.stop.bind(bar),
     [Symbol.dispose]() {
