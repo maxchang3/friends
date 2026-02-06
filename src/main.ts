@@ -7,7 +7,7 @@ import linksData from './data/links.jsonc' with { type: 'jsonc' }
 import { processFriendAvatar, validateFriendLink } from './friends.ts'
 import { processFriendRSS } from './rss.ts'
 import type { Friend } from './schema.ts'
-import { useProgressBar, validate } from './utils.ts'
+import { useProgressBar, useTimer, validate } from './utils.ts'
 
 const limit = pLimit(10)
 
@@ -49,6 +49,8 @@ const processAllFriends = async (friends: Friend[]) => {
 }
 
 const main = async () => {
+  using _ = useTimer((duration) => logger.info(`Build time: ${(duration / 1000).toFixed(2)} s`))
+
   const { data: rawFriends } = validate(linksData)
   logger.info(`Found ${rawFriends.length} friends to process`)
 

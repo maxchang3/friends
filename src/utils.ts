@@ -42,3 +42,13 @@ export const useProgressBar = (bar: GenericBar, total: number) => {
     },
   }
 }
+
+export const useTimer = (callback: (duration: number) => void) => {
+  const start = Date.now()
+  return {
+    [Symbol.dispose]() {
+      const duration = Date.now() - start
+      callback(duration)
+    },
+  }
+}
