@@ -22,14 +22,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: Check for changes in `src`
-        id: changes
-        run: |
-          if git log --format='' --name-only -n 1 | grep -E '^src/'; then
-            echo "DATA_CHANGED=true" >> $GITHUB_ENV
-          else
-            echo "DATA_CHANGED=false" >> $GITHUB_ENV
-          fi
 
       - uses: oven-sh/setup-bun@v2
         with:
@@ -51,5 +43,5 @@ jobs:
           clean: true
 
       - name: Trigger a Deploy hook
-        if: env.DATA_CHANGED == 'true' && env.deployment_status == 'success'
+        if: env.deployment_status == 'success'
         run: curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}
