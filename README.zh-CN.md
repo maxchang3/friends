@@ -34,7 +34,7 @@
      ```yaml
      - name: 张麦麦
        link: https://maxchang.me
-       avatar: https://avatars.githubusercontent.com/u/36927158?v=4
+       avatar: https://avatars.githubusercontent.com/u/36927158
        descr: 我的影子想要去飞翔，我的人还在地上。
        rss: https://maxchang.me/rss.xml
      ```
@@ -43,7 +43,7 @@
      {
        "name": "张麦麦",
        "link": "https://maxchang.me",
-       "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
+       "avatar": "https://avatars.githubusercontent.com/u/36927158",
        "descr": "我的影子想要去飞翔，我的人还在地上。",
        "rss": "https://maxchang.me/rss.xml"
      }
