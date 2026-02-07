@@ -30,43 +30,36 @@
 
 ## 如何交换友链
 
-- 首先您需要添加我的站点到您的友链中。信息如下：
+1. 首先您需要添加我的站点到您的友链中。信息如下：
+     ```yaml
+     - name: 张麦麦
+       link: https://maxchang.me
+       avatar: https://avatars.githubusercontent.com/u/36927158?v=4
+       descr: 我的影子想要去飞翔，我的人还在地上。
+       rss: https://maxchang.me/rss.xml
+     ```
 
-```yaml
-- name: 张麦麦
-  link: https://maxchang.me
-  avatar: https://avatars.githubusercontent.com/u/36927158?v=4
-  descr: 我的影子想要去飞翔，我的人还在地上。
-  rss: https://maxchang.me/rss.xml
-```
-
-```jsonc
-{
-  "name": "张麦麦",
-  "link": "https://maxchang.me",
-  "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
-  "descr": "我的影子想要去飞翔，我的人还在地上。",
-  "rss": "https://maxchang.me/rss.xml"
-}
-```
-
-- Fork 本仓库，修改
-  [src/data/links.jsonc](./src/data/links.jsonc)，添加您的站点信息（可在 GitHub
-  直接编辑）。格式如下（不包含注释）：
-
-```jsonc
-{
-  "name": "站点名称",
-  "link": "https://example.com", // 站点链接
-  "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
-  "descr": "站点描述" // 一句话简介：20~30 字为宜
-  // "rss": "https://example.com/rss.xml" // 可选项：RSS 订阅链接
-}
-```
-
-- 提交 Pull Request。等待自动格式检查通过后合并。
-- 当 PR 合并后，您的站点信息稍候就会出现在
-  [Friends](https://maxchang.me/friends) 页面。
+     ```jsonc
+     {
+       "name": "张麦麦",
+       "link": "https://maxchang.me",
+       "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
+       "descr": "我的影子想要去飞翔，我的人还在地上。",
+       "rss": "https://maxchang.me/rss.xml"
+     }
+     ```
+2. Fork 本仓库，修改 [src/data/links.jsonc](./src/data/links.jsonc)，添加您的站点信息（可在 GitHub 直接编辑）。格式如下（不包含注释）：
+     ```jsonc
+     {
+       "name": "站点名称",
+       "link": "https://example.com", // 站点链接
+       "avatar": "https://example.com/favicon.ico", // 站点头像（图标）
+       "descr": "站点描述" // 一句话简介：20~30 字为宜
+       // "rss": "https://example.com/rss.xml" // 可选项：RSS 订阅链接
+     }
+     ```
+3. 提交 Pull Request。等待自动格式检查通过后合并。
+4. 当 PR 合并后，您的站点信息稍候就会出现在 [Friends](https://maxchang.me/friends) 页面。
 
 ---
 

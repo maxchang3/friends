@@ -38,43 +38,36 @@ Here are some basic requirements:
 
 ## How to Exchange Friend Links
 
-- First, you need to add my site to your friend links. Information as follows:
+1. First, you need to add my site to your friend links. Information as follows:
+     ```yaml
+     - name: Max Chang
+       link: https://maxchang.me
+       avatar: https://avatars.githubusercontent.com/u/36927158?v=4
+       descr: My shadow wants to fly, but I'm still on the ground.
+       rss: https://maxchang.me/rss.xml
+     ```
 
-```yaml
-- name: Max Chang
-  link: https://maxchang.me
-  avatar: https://avatars.githubusercontent.com/u/36927158?v=4
-  descr: My shadow wants to fly, but I'm still on the ground.
-  rss: https://maxchang.me/rss.xml
-```
-
-```jsonc
-{
-  "name": "Max Chang",
-  "link": "https://maxchang.me",
-  "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
-  "descr": "My shadow wants to fly, but I'm still on the ground.",
-  "rss": "https://maxchang.me/rss.xml"
-}
-```
-
-- Fork this repository, modify [src/data/links.json](./src/data/links.jsonc), and add
-  your site information (you can edit it directly on GitHub). Format as follows
-  (without comments):
-
-```jsonc
-{
-  "name": "Site Name",
-  "link": "https://example.com", // Site link
-  "avatar": "https://example.com/favicon.ico", // Site avatar (icon)
-  "descr": "Site description" // One-line introduction: 20-30 characters recommended
-  // "rss": "https://example.com/rss.xml" // Optional: RSS feed link
-}
-```
-
-- Submit a Pull Request. Wait for automatic format checks to pass and then
-  merge.
-- After the PR is merged, your site information will appear on the
+     ```jsonc
+     {
+       "name": "Max Chang",
+       "link": "https://maxchang.me",
+       "avatar": "https://avatars.githubusercontent.com/u/36927158?v=4",
+       "descr": "My shadow wants to fly, but I'm still on the ground.",
+       "rss": "https://maxchang.me/rss.xml"
+     }
+     ```
+2. Fork this repository, modify [src/data/links.json](./src/data/links.jsonc), and add your site information (you can edit it directly on GitHub). Format as follows (without comments):
+     ```jsonc
+     {
+       "name": "Site Name",
+       "link": "https://example.com", // Site link
+       "avatar": "https://example.com/favicon.ico", // Site avatar (icon)
+       "descr": "Site description" // One-line introduction: 20-30 characters recommended
+       // "rss": "https://example.com/rss.xml" // Optional: RSS feed link
+     }
+     ```
+3. Submit a Pull Request. Wait for automatic format checks to pass and then merge.
+4. After the PR is merged, your site information will appear on the
   [Friends](https://maxchang.me/friends) page shortly.
 
 ---
