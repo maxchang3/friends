@@ -6,7 +6,7 @@
 
 # Max Chang & Friends
 
-Hi there! This is where you can exchange friend links with me. :)
+Hi there! This is where you can exchange links with me (AKA Blogroll), or simply to connect! :)
 
 If we haven't interacted before, I'm glad to get to know you through this
 opportunity!
@@ -14,10 +14,10 @@ opportunity!
 In today's era of declining independent blogs and mobile internet dominance, the
 meaning of friend links seems to be more important than ever.
 
-Although it's often said "friendship first, then links", for me, there aren't
+Although it's often said "Friends first, link exchange later", for me, there aren't
 many opportunities to exchange friend links with people I already know.
 
-Therefore, I hope to take this opportunity to "link first, then friendship",
+Therefore, I hope to take this opportunity to "connect first, then become friends",
 establishing connections between us.
 
 ## Basic Requirements
@@ -42,7 +42,7 @@ Here are some basic requirements:
      ```yaml
      - name: Max Chang
        link: https://maxchang.me
-       avatar: https://avatars.githubusercontent.com/u/36927158
+       avatar: https://github.com/maxchang3.png
        descr: My shadow wants to fly, but I'm still on the ground.
        rss: https://maxchang.me/rss.xml
      ```
@@ -51,7 +51,7 @@ Here are some basic requirements:
      {
        "name": "Max Chang",
        "link": "https://maxchang.me",
-       "avatar": "https://avatars.githubusercontent.com/u/36927158",
+       "avatar": "https://github.com/maxchang3.png",
        "descr": "My shadow wants to fly, but I'm still on the ground.",
        "rss": "https://maxchang.me/rss.xml"
      }
